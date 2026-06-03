@@ -1,108 +1,123 @@
-/* ========================================
-   Skills Section
-   ======================================== */
-
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
-    margin-bottom: 80px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 24px;
+  margin-bottom: 80px;
 }
 
 .skill-category {
-    background: var(--card-bg);
-    border: 1px solid var(--border-primary);
-    border-radius: 24px;
-    padding: 40px;
-    transition: all 0.3s ease;
+  background: rgba(21, 28, 39, 0.92);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  padding: 28px;
+  transition: all 0.3s ease;
 }
 
 .skill-category:hover {
-    border-color: var(--accent-primary);
-    transform: translateY(-8px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 18px 48px var(--shadow-primary);
+  transform: translateY(-4px);
+}
+
+.skill-category:last-child {
+  grid-column: span 2;
 }
 
 .category-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
 }
 
 .category-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: white;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  background: rgba(249, 115, 22, 0.08);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  padding: 8px;
 }
 
-.category-icon.primary {
-    background: var(--gradient-primary);
-}
-
-.category-icon.warning {
-    background: linear-gradient(135deg, var(--accent-warning) 0%, #f97316 100%);
-}
-
-.category-icon.success {
-    background: linear-gradient(135deg, var(--accent-success) 0%, #059669 100%);
+.category-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
 }
 
 .category-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--text-primary);
+  font-size: 1.28rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
 }
 
 .category-subtitle {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-top: 4px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 4px;
 }
 
 .skills-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .skill-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 16px;
-    transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 116px;
+  min-width: 112px;
+  max-width: 160px;
+  min-height: 92px;
+  gap: 8px;
+  padding: 16px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .skill-item:hover {
-    background: rgba(234, 88, 12, 0.1);
-    transform: translateY(-4px);
+  background: rgba(234, 88, 12, 0.1);
+  transform: translateY(-4px);
 }
 
 .skill-icon {
-    font-size: 2.5rem;
-    color: var(--accent-primary);
+  font-size: 2rem;
+  color: var(--accent-primary);
+}
+
+.skill-icon-img {
+  width: 34px;
+  height: 34px;
+  display: block;
+  object-fit: contain;
 }
 
 .skill-name {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
 }
 
 .skill-level {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    background: rgba(255, 255, 255, 0.05);
-    padding: 4px 8px;
-    border-radius: 8px;
-    margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-top: 4px;
 }

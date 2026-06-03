@@ -1,15 +1,11 @@
-/* ========================================
-   Main Stylesheet - Imports all modules
-   ======================================== */
-
-@import url('base.css');
-@import url('components.css');
-@import url('layout.css');
-@import url('sections/hero.css');
-@import url('sections/about.css');
-@import url('sections/skills.css');
-@import url('sections/projects.css');
-@import url('sections/languages.css');
-@import url('sections/experience.css');
-@import url('sections/contact.css');
-@import url('responsive.css');
+@import url("base.css");
+@import url("components.css");
+@import url("layout.css");
+@import url("sections/hero.css");
+@import url("sections/about.css");
+@import url("sections/skills.css");
+@import url("sections/projects.css");
+@import url("sections/languages.css");
+@import url("sections/experience.css");
+@import url("sections/contact.css");
+@import url("responsive.css");

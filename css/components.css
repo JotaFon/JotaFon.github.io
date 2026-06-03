@@ -1,14 +1,9 @@
-/* ========================================
-   Components - Buttons, Cards, Badges
-   ======================================== */
-
-/* Buttons */
 .btn {
-  padding: 16px 32px;
-  border-radius: 12px;
+  padding: 14px 26px;
+  border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
@@ -20,7 +15,7 @@
 .btn-primary {
   background: var(--gradient-primary);
   color: white;
-  box-shadow: 0 8px 32px var(--shadow-primary);
+  box-shadow: 0 12px 36px var(--shadow-primary);
 }
 
 .btn-secondary {
@@ -30,11 +25,11 @@
 }
 
 .btn:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 16px 48px var(--shadow-primary);
+  box-shadow: 0 18px 52px var(--shadow-primary);
 }
 
 .btn-secondary:hover {
@@ -47,11 +42,10 @@
   font-size: 1.2rem;
 }
 
-/* Cards */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border-primary);
-  border-radius: 24px;
+  border-radius: 8px;
   padding: 48px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -84,7 +78,6 @@
   box-shadow: 0 32px 64px rgba(0, 0, 0, 0.3);
 }
 
-/* Badges */
 .section-badge {
   display: inline-block;
   background: rgba(220, 38, 38, 0.1);
@@ -100,7 +93,7 @@
   background: rgba(234, 88, 12, 0.1);
   color: var(--accent-primary);
   padding: 6px 16px;
-  border-radius: 20px;
+  border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
   border: 1px solid rgba(234, 88, 12, 0.2);
@@ -110,91 +103,7 @@
   background: rgba(234, 88, 12, 0.1);
   color: var(--accent-primary);
   padding: 6px 16px;
-  border-radius: 20px;
+  border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
-}
-
-/* Loading */
-.loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fcfcf9;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  z-index: 9999;
-  transition: opacity 0.5s ease;
-}
-
-.loading.fade-out {
-  animation: loading-pop 1s cubic-bezier(0.4, 2, 0.6, 1) forwards;
-  pointer-events: none;
-}
-
-@keyframes loading-pop {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  40% {
-    opacity: 1;
-    transform: scale(1.5);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.51);
-  }
-  65% {
-    opacity: 1;
-    transform: scale(1.5);
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0);
-  }
-}
-
-.loading-gif {
-  width: 160px;
-  height: 160px;
-  object-fit: contain;
-}
-
-.loading-text {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 1rem;
-  color: #000000;
-  letter-spacing: 2px;
-}
-
-.loading-dots {
-  display: inline-block;
-  width: 1.5em;
-  text-align: left;
-}
-
-.loading-dots::after {
-  content: "";
-  animation: loading-dots 1.5s infinite steps(1);
-}
-
-@keyframes loading-dots {
-  0% {
-    content: ".";
-  }
-  33% {
-    content: "..";
-  }
-  66% {
-    content: "...";
-  }
 }

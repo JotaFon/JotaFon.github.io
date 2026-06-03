@@ -20,7 +20,6 @@ const initParallax = () => {
     const hero = document.querySelector(".hero");
 
     if (hero) {
-      // Aplica parallax na seção hero inteira, não no content
       hero.style.backgroundPositionY = `${scrolled * 0.3}px`;
     }
   });
