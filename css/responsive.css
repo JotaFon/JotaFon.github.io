@@ -1,0 +1,93 @@
+/* ========================================
+   Responsive Styles
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        text-align: center;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar {
+        padding: 8px 20px;
+    }
+
+    .nav-links {
+        gap: 20px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .section {
+        padding: 80px 0;
+    }
+
+    .card {
+        padding: 32px 24px;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .timeline {
+        padding-left: 40px;
+    }
+
+    .timeline::before {
+        left: 15px;
+    }
+
+    .timeline-item::before {
+        left: -52px;
+    }
+
+    .job-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar {
+        left: 16px;
+        right: 16px;
+        transform: none;
+        border-radius: 16px;
+    }
+
+    .nav-links {
+        gap: 16px;
+        font-size: 0.9rem;
+    }
+
+    .profile-img {
+        width: 200px;
+        height: 200px;
+        font-size: 80px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-image {
+        height: 200px;
+    }
+
+    .project-placeholder {
+        font-size: 60px;
+    }
+}

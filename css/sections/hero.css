@@ -1,0 +1,321 @@
+/* ========================================
+   Hero Section
+   ======================================== */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+    max-width: 900px;
+}
+
+/* Hero elements stagger animation (exclude h1 which has glitch) */
+.hero-content > *:not(h1) {
+    opacity: 0;
+    animation: hero-fade-in 0.8s ease forwards;
+}
+
+.hero-content > *:nth-child(1) { animation-delay: 0.2s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.6s; }
+.hero-content > *:nth-child(4) { animation-delay: 0.8s; }
+.hero-content > *:nth-child(5) { animation-delay: 1s; }
+.hero-content > *:nth-child(6) { animation-delay: 1.2s; }
+.hero-content > *:nth-child(7) { animation-delay: 1.4s; }
+
+@keyframes hero-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(234, 88, 12, 0.1);
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 32px;
+}
+
+/* ========================================
+   Glitch Effect on Name - Entrada
+   ======================================== */
+
+.hero h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    line-height: 1.1;
+    position: relative;
+    display: inline-block;
+    /* Animação de entrada com glitch */
+    animation: glitch-reveal 1.5s ease forwards;
+}
+
+.hero h1::before,
+.hero h1::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.hero h1::before {
+    color: #ff00ff;
+    z-index: -1;
+    animation: glitch-reveal-before 1.5s ease forwards;
+}
+
+.hero h1::after {
+    color: #00ffff;
+    z-index: -1;
+    animation: glitch-reveal-after 1.5s ease forwards;
+}
+
+/* Animação principal de reveal com glitch */
+@keyframes glitch-reveal {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+        filter: blur(10px);
+    }
+    10% {
+        opacity: 1;
+        transform: translateX(15px) skewX(10deg);
+        filter: blur(0);
+    }
+    15% {
+        transform: translateX(-10px) skewX(-5deg);
+    }
+    20% {
+        transform: translateX(8px) skewX(3deg);
+    }
+    25% {
+        transform: translateX(-5px) skewX(-2deg);
+    }
+    30% {
+        transform: translateX(3px) skewX(1deg);
+    }
+    35% {
+        transform: translateX(-2px);
+    }
+    40% {
+        transform: translateX(1px);
+    }
+    50%, 100% {
+        opacity: 1;
+        transform: translateX(0) skewX(0);
+    }
+    /* Glitches aleatórios durante a entrada */
+    52% { transform: translateX(0); }
+    53% { transform: translateX(-3px); }
+    54% { transform: translateX(0); }
+    70% { transform: translateX(0); }
+    71% { transform: translateX(2px) skewX(-1deg); }
+    72% { transform: translateX(0); }
+    85% { transform: translateX(0); }
+    86% { transform: translateX(-2px); }
+    87% { transform: translateX(0); }
+}
+
+/* Pseudo-elementos com cores separadas */
+@keyframes glitch-reveal-before {
+    0% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+    10% {
+        opacity: 0.8;
+        transform: translateX(-8px);
+    }
+    15% {
+        transform: translateX(5px);
+    }
+    20% {
+        transform: translateX(-4px);
+    }
+    25% {
+        transform: translateX(3px);
+    }
+    30% {
+        transform: translateX(-2px);
+    }
+    40%, 50% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+    /* Flashes */
+    52% { opacity: 0; }
+    53% { opacity: 0.6; transform: translateX(-4px); }
+    54% { opacity: 0; }
+    70% { opacity: 0; }
+    71% { opacity: 0.5; transform: translateX(3px); }
+    72% { opacity: 0; }
+    85% { opacity: 0; }
+    86% { opacity: 0.4; transform: translateX(-2px); }
+    87%, 100% { opacity: 0; }
+}
+
+@keyframes glitch-reveal-after {
+    0% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+    10% {
+        opacity: 0.8;
+        transform: translateX(8px);
+    }
+    15% {
+        transform: translateX(-5px);
+    }
+    20% {
+        transform: translateX(4px);
+    }
+    25% {
+        transform: translateX(-3px);
+    }
+    30% {
+        transform: translateX(2px);
+    }
+    40%, 50% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+    /* Flashes */
+    52% { opacity: 0; }
+    53% { opacity: 0.6; transform: translateX(4px); }
+    54% { opacity: 0; }
+    70% { opacity: 0; }
+    71% { opacity: 0.5; transform: translateX(-3px); }
+    72% { opacity: 0; }
+    85% { opacity: 0; }
+    86% { opacity: 0.4; transform: translateX(2px); }
+    87%, 100% { opacity: 0; }
+}
+
+/* Glitch no hover */
+.hero h1:hover {
+    animation: glitch-hover 0.4s ease;
+}
+
+.hero h1:hover::before {
+    animation: glitch-hover-color 0.4s ease;
+}
+
+.hero h1:hover::after {
+    animation: glitch-hover-color-alt 0.4s ease;
+}
+
+@keyframes glitch-hover {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-3px) skewX(-2deg); }
+    20% { transform: translateX(3px) skewX(2deg); }
+    30% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    50% { transform: translateX(-1px) skewX(-1deg); }
+    60% { transform: translateX(1px) skewX(1deg); }
+}
+
+@keyframes glitch-hover-color {
+    0%, 100% { opacity: 0; }
+    10% { opacity: 0.7; transform: translateX(-5px); }
+    20% { opacity: 0; }
+    30% { opacity: 0.5; transform: translateX(4px); }
+    40% { opacity: 0; }
+    50% { opacity: 0.6; transform: translateX(-3px); }
+    60% { opacity: 0; }
+}
+
+@keyframes glitch-hover-color-alt {
+    0%, 100% { opacity: 0; }
+    15% { opacity: 0.7; transform: translateX(5px); }
+    25% { opacity: 0; }
+    35% { opacity: 0.5; transform: translateX(-4px); }
+    45% { opacity: 0; }
+    55% { opacity: 0.6; transform: translateX(3px); }
+    65% { opacity: 0; }
+}
+
+.language-selector {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.lang-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--border-primary);
+    background: rgba(26, 26, 39, 0.8);
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.lang-btn img {
+    width: 32px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.lang-btn:hover {
+    transform: scale(1.1);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 20px var(--shadow-primary);
+}
+
+.lang-btn.active {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 20px var(--shadow-primary);
+}
+
+.hero-subtitle {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+    font-weight: 600;
+}
+
+.hero-description {
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
