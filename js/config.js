@@ -1,7 +1,7 @@
 const particlesConfig = {
   particles: {
     number: { value: 80, density: { enable: true, value_area: 800 } },
-    color: { value: "#ea580c" },
+    color: { value: "#d4af37" },
     shape: { type: "circle", stroke: { width: 0, color: "#000000" } },
     opacity: {
       value: 0.1,
@@ -16,7 +16,7 @@ const particlesConfig = {
     line_linked: {
       enable: true,
       distance: 150,
-      color: "#ea580c",
+      color: "#d4af37",
       opacity: 0.1,
       width: 1,
     },
@@ -50,6 +50,12 @@ const particlesConfig = {
 };
 
 const colorConfig = {
-  start: [10, 10, 15],
-  end: [19, 19, 26],
+  dark: {
+    start: [10, 10, 15],
+    end: [19, 19, 26],
+  },
+  light: {
+    start: [248, 246, 239],
+    end: [239, 235, 224],
+  },
 };

@@ -9,15 +9,22 @@
 .language-card {
   background: var(--card-bg);
   border: 1px solid var(--border-primary);
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 40px;
   text-align: center;
-  transition: all 0.3s ease;
+  overflow: hidden;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
 }
 
 .language-card:hover {
-  transform: translateY(-8px);
+  transform: var(--tilt, translateY(-8px));
   border-color: var(--accent-primary);
+  box-shadow:
+    0 18px 48px var(--shadow-primary),
+    0 0 0 1px rgba(212, 175, 55, 0.24);
 }
 
 .language-flag {
@@ -26,6 +33,11 @@
   margin: 0 auto 20px;
   border-radius: 8px;
   overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.language-card:hover .language-flag {
+  transform: translateY(-2px) scale(1.04);
 }
 
 .language-flag img,
@@ -48,22 +60,29 @@
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.language-card:hover .language-level {
+  transform: translateY(-1px);
 }
 
 .language-level.native {
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(198, 162, 74, 0.1);
   color: var(--accent-success);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  border: 1px solid rgba(198, 162, 74, 0.28);
 }
 
 .language-level.intermediate {
-  background: rgba(234, 88, 12, 0.1);
+  background: rgba(212, 175, 55, 0.1);
   color: var(--accent-primary);
-  border: 1px solid rgba(234, 88, 12, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .language-level.learning {
-  background: rgba(245, 158, 11, 0.1);
+  background: rgba(159, 122, 24, 0.12);
   color: var(--accent-warning);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.26);
 }

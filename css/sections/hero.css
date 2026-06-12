@@ -47,7 +47,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(249, 115, 22, 0.1);
+  background: rgba(212, 175, 55, 0.1);
   border: 1px solid var(--accent-primary);
   padding: 8px 20px;
   border-radius: 8px;
@@ -126,7 +126,7 @@
   height: 34px;
   border-radius: 8px;
   border: 2px solid var(--border-primary);
-  background: rgba(21, 28, 39, 0.8);
+  background: var(--panel-bg);
   cursor: pointer;
   overflow: hidden;
   padding: 0;
@@ -179,7 +179,7 @@
 }
 
 .hero-highlight {
-  background: rgba(21, 28, 39, 0.72);
+  background: var(--panel-bg);
   border: 1px solid var(--border-primary);
   border-radius: 8px;
   padding: 18px;

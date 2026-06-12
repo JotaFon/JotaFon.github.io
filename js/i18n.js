@@ -13,7 +13,7 @@ const translations = {
     "hero.highlight1.value": "2+ anos",
     "hero.highlight1.label": "de experiência profissional",
     "hero.highlight2.value": "Full Stack",
-    "hero.highlight2.label": "TypeScript, AdonisJS, React Native",
+    "hero.highlight2.label": "TypeScript, AdonisJS, Flutter",
     "hero.highlight3.value": "Londrina, BR",
     "hero.highlight3.label": "aberto a vagas remotas",
     "hero.cta": "Entrar em contato",
@@ -22,7 +22,7 @@ const translations = {
     "about.text1":
       'Sou <span class="highlight">Desenvolvedor Full Stack</span> e atuo em front-end, back-end e mobile, transformando necessidades operacionais em produtos digitais claros e fáceis de manter.',
     "about.text2":
-      "Minha stack atual inclui <strong>TypeScript, AdonisJS, PostgreSQL, React, Redux, Vite e React Native</strong>.",
+      "Minha stack atual inclui <strong>TypeScript, AdonisJS, PostgreSQL, React, Redux, Vite, React Native e Flutter</strong>.",
     "about.text3":
       "Antes da programação, trabalhei com pintura digital, uma base criativa que ainda influencia como penso em clareza de interface e detalhes visuais.",
     "about.text4":
@@ -33,7 +33,6 @@ const translations = {
     "skills.frontend": "Front-end",
     "skills.backend": "Back-end",
     "skills.mobile": "Mobile",
-    "skills.database": "Banco de Dados",
     "skills.tools": "Ferramentas & Design",
     "projects.title": "Projetos",
     "projects.description": "Alguns dos projetos que desenvolvi recentemente",
@@ -59,8 +58,8 @@ const translations = {
     "languages.english": "Inglês",
     "languages.german": "Alemão",
     "languages.native": "Nativo",
-    "languages.intermediate": "Intermediário Avançado",
-    "languages.learning": "Aprendendo (A2 Atualmente)",
+    "languages.intermediate": "Intermediário",
+    "languages.learning": "Nível A2",
     "experience.title": "Jornada Profissional",
     "experience.job1.title": "Desenvolvedor Full Stack",
     "experience.job1.location": "Londrina - PR, Brasil",
@@ -107,7 +106,7 @@ const translations = {
     "hero.highlight1.value": "2+ Jahre",
     "hero.highlight1.label": "Berufserfahrung",
     "hero.highlight2.value": "Full Stack",
-    "hero.highlight2.label": "TypeScript, AdonisJS, React Native",
+    "hero.highlight2.label": "TypeScript, AdonisJS, Flutter",
     "hero.highlight3.value": "Londrina, BR",
     "hero.highlight3.label": "offen für Remote-Rollen",
     "hero.cta": "Kontakt aufnehmen",
@@ -116,7 +115,7 @@ const translations = {
     "about.text1":
       'Ich bin <span class="highlight">Full Stack Entwickler</span> und arbeite in Front-end, Back-end und Mobile, um operative Anforderungen in klare und wartbare digitale Produkte umzusetzen.',
     "about.text2":
-      "Mein aktueller Stack umfasst <strong>TypeScript, AdonisJS, PostgreSQL, React, Redux, Vite und React Native</strong>.",
+      "Mein aktueller Stack umfasst <strong>TypeScript, AdonisJS, PostgreSQL, React, Redux, Vite, React Native und Flutter</strong>.",
     "about.text3":
       "Vor der Programmierung habe ich mit digitaler Malerei gearbeitet, ein kreativer Hintergrund, der weiterhin beeinflusst, wie ich über Interface-Klarheit und visuelle Details denke.",
     "about.text4":
@@ -127,7 +126,6 @@ const translations = {
     "skills.frontend": "Front-end",
     "skills.backend": "Back-end",
     "skills.mobile": "Mobile",
-    "skills.database": "Datenbanken",
     "skills.tools": "Werkzeuge & Design",
     "projects.title": "Projekte",
     "projects.description":
@@ -154,8 +152,8 @@ const translations = {
     "languages.english": "Englisch",
     "languages.german": "Deutsch",
     "languages.native": "Muttersprache",
-    "languages.intermediate": "Obere Mittelstufe",
-    "languages.learning": "Lernend (A2 Derzeit)",
+    "languages.intermediate": "Mittelstufe",
+    "languages.learning": "Niveau A2",
     "experience.title": "Beruflicher Werdegang",
     "experience.job1.title": "Full Stack Entwickler",
     "experience.job1.location": "Londrina - PR, Brasilien",

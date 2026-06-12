@@ -3,18 +3,21 @@
   --secondary-bg: #111827;
   --card-bg: #151c27;
   --card-hover: #1b2635;
-  --accent-primary: #f97316;
-  --accent-secondary: #dc2626;
-  --accent-success: #f59e0b;
-  --accent-warning: #f59e0b;
+  --panel-bg: rgba(21, 28, 39, 0.88);
+  --item-bg: rgba(255, 255, 255, 0.035);
+  --item-border: rgba(148, 163, 184, 0.08);
+  --accent-primary: #d4af37;
+  --accent-secondary: #9f7a18;
+  --accent-success: #c6a24a;
+  --accent-warning: #d4af37;
   --accent-danger: #ef4444;
   --text-primary: #ffffff;
   --text-secondary: #e2e8f0;
   --text-muted: #94a3b8;
   --border-primary: #263244;
-  --border-accent: #f97316;
-  --shadow-primary: rgba(249, 115, 22, 0.14);
-  --shadow-secondary: rgba(220, 38, 38, 0.12);
+  --border-accent: #d4af37;
+  --shadow-primary: rgba(212, 175, 55, 0.16);
+  --shadow-secondary: rgba(159, 122, 24, 0.14);
   --gradient-primary: linear-gradient(
     135deg,
     var(--accent-primary) 0%,
@@ -22,10 +25,34 @@
   );
   --gradient-text: linear-gradient(
     135deg,
-    #ffb86b 0%,
-    #f97316 48%,
-    #dc2626 100%
+    #f7e7a6 0%,
+    #d4af37 48%,
+    #9f7a18 100%
   );
+  --page-bg-start: 10, 10, 15;
+  --page-bg-end: 19, 19, 26;
+  --navbar-bg: rgba(17, 24, 39, 0.88);
+  --navbar-bg-scrolled: rgba(17, 24, 39, 0.96);
+}
+
+:root[data-theme="light"] {
+  --primary-bg: #f8f6ef;
+  --secondary-bg: #efe9dc;
+  --card-bg: #fffaf0;
+  --card-hover: #f5eddb;
+  --panel-bg: rgba(255, 250, 240, 0.86);
+  --item-bg: rgba(255, 255, 255, 0.62);
+  --item-border: rgba(159, 122, 24, 0.16);
+  --text-primary: #171512;
+  --text-secondary: #37322a;
+  --text-muted: #716955;
+  --border-primary: #ded3b8;
+  --shadow-primary: rgba(159, 122, 24, 0.16);
+  --shadow-secondary: rgba(159, 122, 24, 0.12);
+  --page-bg-start: 248, 246, 239;
+  --page-bg-end: 239, 235, 224;
+  --navbar-bg: rgba(255, 250, 240, 0.82);
+  --navbar-bg-scrolled: rgba(255, 250, 240, 0.94);
 }
 
 * {
@@ -49,6 +76,60 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -2;
+  pointer-events: none;
+}
+
+body::before {
+  background:
+    radial-gradient(circle at 18% 24%, rgba(212, 175, 55, 0.12), transparent 28%),
+    radial-gradient(circle at 78% 18%, rgba(159, 122, 24, 0.1), transparent 30%),
+    radial-gradient(circle at 55% 84%, rgba(247, 231, 166, 0.07), transparent 34%);
+  animation: ambient-drift 18s ease-in-out infinite alternate;
+}
+
+:root[data-theme="light"] body::before {
+  background:
+    radial-gradient(circle at 18% 24%, rgba(212, 175, 55, 0.18), transparent 30%),
+    radial-gradient(circle at 78% 18%, rgba(159, 122, 24, 0.1), transparent 32%),
+    radial-gradient(circle at 55% 84%, rgba(255, 255, 255, 0.72), transparent 36%);
+}
+
+body::after {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 72%);
+  animation: grid-drift 28s linear infinite;
+}
+
+@keyframes ambient-drift {
+  from {
+    transform: translate3d(-2%, -1%, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(2%, 1%, 0) rotate(8deg);
+  }
+}
+
+@keyframes grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 72px 72px;
+  }
 }
 
 #particles-js {
@@ -88,7 +169,7 @@ body {
 }
 
 .floating {
-  animation: floating 6s ease-in-out infinite;
+  animation: floating 8s ease-in-out infinite;
 }
 
 @keyframes floating {
@@ -97,7 +178,7 @@ body {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-6px);
   }
 }
 
@@ -126,5 +207,16 @@ body {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }

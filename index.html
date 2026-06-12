@@ -7,7 +7,7 @@
 
     <meta
       name="description"
-      content="João Victor Fonseca - Full Stack Developer working with TypeScript, AdonisJS, React, Redux, Vite, PostgreSQL and React Native."
+      content="João Victor Fonseca - Full Stack Developer working with TypeScript, AdonisJS, React, Redux, Vite, React Native and Flutter."
     />
     <meta
       name="keywords"
@@ -15,6 +15,14 @@
     />
     <meta name="author" content="João Victor Fonseca" />
     <meta name="theme-color" content="#0b0f14" />
+
+    <script>
+      document.documentElement.dataset.theme =
+        localStorage.getItem("theme") ||
+        (window.matchMedia("(prefers-color-scheme: light)").matches
+          ? "light"
+          : "dark");
+    </script>
 
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="shortcut icon" href="assets/favicon.svg" />
@@ -59,13 +67,20 @@
       SectionsLoader.init("app");
 
       document.addEventListener("sectionsLoaded", () => {
-        AOS.init({
-          duration: 1000,
-          once: true,
-          offset: 100,
-        });
+        if (typeof AOS !== "undefined") {
+          AOS.init({
+            duration: 720,
+            easing: "ease-out-cubic",
+            once: true,
+            offset: 80,
+          });
+        }
 
-        if (document.getElementById("particles-js")) {
+        if (
+          document.getElementById("particles-js") &&
+          typeof particlesJS !== "undefined" &&
+          typeof particlesConfig !== "undefined"
+        ) {
           particlesJS("particles-js", particlesConfig);
         }
 
@@ -77,12 +92,15 @@
         if (typeof initSmoothScroll === "function") initSmoothScroll();
         if (typeof initParallax === "function") initParallax();
         if (typeof initRipple === "function") initRipple();
+        if (typeof initCardRevealAnimation === "function")
+          initCardRevealAnimation();
         if (typeof initSkillsAnimation === "function") initSkillsAnimation();
         if (typeof initTimelineAnimation === "function")
           initTimelineAnimation();
         if (typeof initBackgroundScroll === "function") initBackgroundScroll();
         if (typeof initKonamiCode === "function") initKonamiCode();
-        if (typeof initContactCards === "function") initContactCards();
+        if (typeof initInteractiveCards === "function") initInteractiveCards();
+        if (typeof initThemeToggle === "function") initThemeToggle();
 
         window.addEventListener("scroll", () => {
           const navbar = document.getElementById("navbar");

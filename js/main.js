@@ -27,11 +27,14 @@ const isDynamicLoading =
   typeof SectionsLoader !== "undefined" && window.location.protocol !== "file:";
 
 if (!isDynamicLoading) {
-  AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 100,
-  });
+  if (typeof AOS !== "undefined") {
+    AOS.init({
+      duration: 720,
+      easing: "ease-out-cubic",
+      once: true,
+      offset: 80,
+    });
+  }
 
   window.addEventListener("scroll", () => {
     const navbar = document.getElementById("navbar");
@@ -55,11 +58,14 @@ if (!isDynamicLoading) {
     if (typeof initSmoothScroll === "function") initSmoothScroll();
     if (typeof initParallax === "function") initParallax();
     if (typeof initRipple === "function") initRipple();
+    if (typeof initCardRevealAnimation === "function")
+      initCardRevealAnimation();
     if (typeof initSkillsAnimation === "function") initSkillsAnimation();
     if (typeof initTimelineAnimation === "function") initTimelineAnimation();
     if (typeof initBackgroundScroll === "function") initBackgroundScroll();
     if (typeof initKonamiCode === "function") initKonamiCode();
-    if (typeof initContactCards === "function") initContactCards();
+    if (typeof initInteractiveCards === "function") initInteractiveCards();
+    if (typeof initThemeToggle === "function") initThemeToggle();
   });
 }
 

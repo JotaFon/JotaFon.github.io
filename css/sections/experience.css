@@ -1,109 +1,265 @@
-.timeline {
+.experience-map {
+  min-height: 690px;
+  max-width: 1120px;
+  margin: 0 auto;
   position: relative;
-  padding-left: 60px;
 }
 
-.timeline::before {
+.experience-map::before {
   content: "";
   position: absolute;
-  left: 20px;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--gradient-primary);
-  border-radius: 2px;
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 60px;
-  background: var(--card-bg);
-  border: 1px solid var(--border-primary);
-  border-radius: 8px;
-  padding: 40px;
-  transition: all 0.3s ease;
-}
-
-.timeline-item::before {
-  content: "";
-  position: absolute;
-  left: -72px;
-  top: 40px;
-  width: 20px;
-  height: 20px;
-  background: var(--accent-primary);
+  inset: 6% 2% 4%;
   border-radius: 50%;
-  border: 4px solid var(--primary-bg);
-  box-shadow: 0 0 0 4px var(--accent-primary);
+  background:
+    radial-gradient(circle at 18% 20%, rgba(212, 175, 55, 0.1), transparent 22%),
+    radial-gradient(circle at 78% 40%, rgba(212, 175, 55, 0.08), transparent 24%),
+    radial-gradient(circle at 38% 78%, rgba(212, 175, 55, 0.08), transparent 24%);
+  pointer-events: none;
 }
 
-.timeline-item:hover {
-  transform: translateX(16px);
-  border-color: var(--accent-primary);
+.map-arrow {
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.22));
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.map-arrow-one {
+  left: 34%;
+  top: 10%;
+  width: min(24vw, 260px);
+  transform: rotate(2deg);
+}
+
+.map-arrow-two {
+  left: 44%;
+  top: 40%;
+  width: min(13vw, 130px);
+  transform: rotate(6deg);
+}
+
+.map-node {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.map-node-painting {
+  left: 6%;
+  top: 6%;
+  width: min(26vw, 305px);
+}
+
+.map-node-frontend {
+  left: 55%;
+  top: 16%;
+  width: min(26vw, 305px);
+}
+
+.map-node-fullstack {
+  left: 55%;
+  top: 60%;
+  width: min(28vw, 305px);
+}
+
+.map-island {
+  display: block;
+  width: 100%;
+  transition:
+    filter 0.3s ease,
+    transform 0.35s ease;
+  user-select: none;
+}
+
+.map-node:hover .map-island,
+.map-node:focus-visible .map-island {
+  filter: drop-shadow(0 22px 40px var(--shadow-primary));
+  transform: translateY(-6px);
+}
+
+.map-card {
+  background: color-mix(in srgb, var(--card-bg) 92%, transparent);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 8px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(212, 175, 55, 0.1);
+  max-width: 430px;
+  opacity: 0;
+  padding: 22px;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(12px, -50%) scale(0.97);
+  transition:
+    opacity 0.24s ease,
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.24s ease;
+  visibility: hidden;
+  width: min(430px, 36vw);
+  z-index: 5;
+}
+
+.map-card-wide {
+  max-width: 460px;
+  width: min(460px, 38vw);
+}
+
+.map-node:hover .map-card,
+.map-node:focus-within .map-card,
+.map-node:focus-visible .map-card {
+  opacity: 1;
+  transform: translate(0, -50%) scale(1);
+  visibility: visible;
+}
+
+.map-node-painting .map-card {
+  right: calc(100% + 18px);
+  transform: translate(-12px, -50%) scale(0.97);
+}
+
+.map-node-painting:hover .map-card,
+.map-node-painting:focus-within .map-card,
+.map-node-painting:focus-visible .map-card {
+  transform: translate(0, -50%) scale(1);
+}
+
+.map-node-frontend .map-card,
+.map-node-fullstack .map-card {
+  left: calc(100% + 18px);
+}
+
+.map-node-frontend .map-card {
+  top: 44%;
+}
+
+.map-node-fullstack .map-card {
+  top: 50%;
+}
+
+.map-role + .map-role {
+  border-top: 1px dashed rgba(212, 175, 55, 0.22);
+  margin-top: 18px;
+  padding-top: 18px;
 }
 
 .job-header {
-  display: flex;
-  justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 20px;
+  display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 14px;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .job-title {
-  font-size: 1.5rem;
-  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 8px;
+  font-size: 1.22rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 6px;
 }
 
 .company {
   color: var(--accent-primary);
+  font-size: 0.98rem;
   font-weight: 600;
-  font-size: 1.1rem;
 }
 
 .job-duration {
-  background: rgba(234, 88, 12, 0.1);
-  color: var(--accent-primary);
-  padding: 6px 16px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
   border-radius: 8px;
-  font-size: 0.9rem;
+  color: var(--accent-primary);
+  font-size: 0.82rem;
   font-weight: 600;
+  padding: 6px 12px;
 }
 
 .job-location {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   margin-top: 4px;
 }
 
 .job-responsibilities {
   list-style: none;
-  margin: 24px 0;
+  margin: 16px 0 0;
   padding: 0;
 }
 
 .job-responsibilities li {
-  padding-left: 32px;
-  margin-bottom: 12px;
-  position: relative;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.55;
+  margin-bottom: 10px;
+  padding-left: 24px;
+  position: relative;
 }
 
 .job-responsibilities li::before {
-  content: "▹";
+  background: var(--accent-primary);
+  border-radius: 2px;
+  content: "";
+  height: 7px;
+  left: 2px;
   position: absolute;
-  left: 0;
-  color: var(--accent-primary);
-  font-size: 1.2rem;
+  top: 0.72em;
+  transform: rotate(45deg);
+  width: 7px;
 }
 
 .job-tech {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .experience-map {
+    display: grid;
+    gap: 40px;
+    min-height: auto;
+  }
+
+  .experience-map::before,
+  .map-arrow {
+    display: none;
+  }
+
+  .map-node,
+  .map-node-painting,
+  .map-node-frontend,
+  .map-node-fullstack {
+    left: auto;
+    position: relative;
+    right: auto;
+    top: auto;
+    width: min(100%, 460px);
+  }
+
+  .map-node:nth-of-type(2n) {
+    justify-self: end;
+  }
+
+  .map-card,
+  .map-card-wide,
+  .map-node-painting .map-card,
+  .map-node-frontend .map-card,
+  .map-node-fullstack .map-card {
+    left: auto;
+    margin-top: 14px;
+    max-width: none;
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    visibility: visible;
+    width: 100%;
+  }
 }

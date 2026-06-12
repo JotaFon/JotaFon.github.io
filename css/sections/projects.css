@@ -10,17 +10,20 @@
   border: 1px solid var(--border-primary);
   border-radius: 8px;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
   display: flex;
   flex-direction: column;
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
+  transform: var(--tilt, translateY(-8px));
   border-color: var(--accent-primary);
   box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(234, 88, 12, 0.1);
+    0 18px 48px var(--shadow-primary),
+    0 0 0 1px rgba(212, 175, 55, 0.24);
 }
 
 .project-media {
@@ -35,15 +38,25 @@
   border-bottom: 1px solid var(--border-primary);
 }
 
+.project-media::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 42%;
+  background: linear-gradient(to top, rgba(11, 15, 20, 0.55), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
 .project-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: filter 0.3s ease;
 }
 
-.project-card:hover .project-image {
-  transform: scale(1.02);
+.project-card:hover .project-media::after {
+  opacity: 1;
 }
 
 .project-status {
@@ -144,6 +157,11 @@
   left: 0;
   position: absolute;
   top: 10px;
+  transition: transform 0.25s ease;
+}
+
+.project-card:hover .project-points li::before {
+  transform: scale(1.25);
 }
 
 .project-tags {
@@ -155,18 +173,19 @@
 
 .tech-tag {
   padding: 6px 14px;
-  background: rgba(234, 88, 12, 0.1);
+  background: rgba(212, 175, 55, 0.1);
   color: var(--accent-primary);
   font-size: 0.8rem;
   font-weight: 500;
   border-radius: 6px;
-  border: 1px solid rgba(234, 88, 12, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.22);
   transition: all 0.3s ease;
 }
 
 .tech-tag:hover {
-  background: rgba(234, 88, 12, 0.2);
+  background: rgba(212, 175, 55, 0.18);
   border-color: var(--accent-primary);
+  transform: translateY(-1px);
 }
 
 .project-actions {

@@ -3,7 +3,7 @@
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(17, 24, 39, 0.88);
+  background: var(--navbar-bg);
   backdrop-filter: blur(20px);
   border: 1px solid var(--border-primary);
   border-radius: 8px;
@@ -17,8 +17,12 @@
 }
 
 .navbar.scrolled {
-  background: rgba(17, 24, 39, 0.96);
+  background: var(--navbar-bg-scrolled);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="light"] .navbar.scrolled {
+  box-shadow: 0 12px 36px rgba(56, 45, 22, 0.12);
 }
 
 .nav-links {
@@ -57,6 +61,34 @@
 .nav-language {
   display: flex;
   gap: 12px;
+}
+
+.theme-toggle {
+  align-items: center;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 8px;
+  color: var(--accent-primary);
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 34px;
+  height: 34px;
+  justify-content: center;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+  width: 34px;
+}
+
+.theme-toggle:hover {
+  background: rgba(212, 175, 55, 0.18);
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.theme-toggle-icon {
+  font-size: 0.95rem;
 }
 
 .section {

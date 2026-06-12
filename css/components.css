@@ -28,13 +28,23 @@
   transform: translateY(-2px);
 }
 
+.btn i,
+.project-btn i {
+  transition: transform 0.25s ease;
+}
+
+.btn:hover i,
+.project-btn:hover i {
+  transform: translateX(2px);
+}
+
 .btn-primary:hover {
   box-shadow: 0 18px 52px var(--shadow-primary);
 }
 
 .btn-secondary:hover {
   border-color: var(--accent-primary);
-  background: rgba(234, 88, 12, 0.1);
+  background: rgba(212, 175, 55, 0.1);
 }
 
 .btn-large {
@@ -62,7 +72,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(234, 88, 12, 0.1),
+    rgba(212, 175, 55, 0.1),
     transparent
   );
   transition: left 0.5s;
@@ -80,7 +90,7 @@
 
 .section-badge {
   display: inline-block;
-  background: rgba(220, 38, 38, 0.1);
+  background: rgba(159, 122, 24, 0.12);
   color: var(--accent-secondary);
   padding: 8px 20px;
   border-radius: 50px;
@@ -90,20 +100,178 @@
 }
 
 .tech-badge {
-  background: rgba(234, 88, 12, 0.1);
+  background: rgba(212, 175, 55, 0.1);
   color: var(--accent-primary);
   padding: 6px 16px;
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
-  border: 1px solid rgba(234, 88, 12, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.22);
 }
 
 .tech-tag {
-  background: rgba(234, 88, 12, 0.1);
+  background: rgba(212, 175, 55, 0.1);
   color: var(--accent-primary);
   padding: 6px 16px;
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
+}
+
+.interactive-surface {
+  --spotlight-x: 50%;
+  --spotlight-y: 50%;
+  position: relative;
+  isolation: isolate;
+  transform: var(--tilt, translateY(0));
+}
+
+.interactive-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  background: radial-gradient(
+    220px circle at var(--spotlight-x) var(--spotlight-y),
+    rgba(212, 175, 55, 0.16),
+    transparent 58%
+  );
+}
+
+.interactive-surface:hover::after {
+  opacity: 1;
+}
+
+.interactive-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+[data-aos] {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.reveal-card,
+.reveal-soft,
+.reveal-slide,
+.reveal-left,
+.reveal-right,
+.reveal-map,
+.reveal-fade {
+  opacity: 0;
+  filter: blur(7px);
+  will-change: opacity, transform;
+}
+
+.reveal-card,
+.skill-category.reveal-card,
+.project-card.reveal-card,
+.language-card.reveal-card,
+.contact-card.reveal-card {
+  transform: translate3d(0, 44px, 0) scale(0.965);
+  transition:
+    opacity 0.72s ease,
+    filter 0.72s ease,
+    transform 0.98s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.reveal-soft,
+.section-header.reveal-soft,
+.skill-item.reveal-soft,
+.project-points li.reveal-soft,
+.tech-tag.reveal-soft {
+  transform: translate3d(0, 32px, 0) scale(0.975);
+  transition:
+    opacity 0.68s ease,
+    filter 0.68s ease,
+    transform 0.92s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-slide,
+.timeline-item.reveal-slide {
+  transform: translate3d(0, 40px, 0) scale(0.972);
+  transition:
+    opacity 0.74s ease,
+    filter 0.74s ease,
+    transform 1.02s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.reveal-left,
+.about-image.reveal-left {
+  transform: translate3d(-46px, 0, 0) scale(0.975);
+  transition:
+    opacity 0.72s ease,
+    filter 0.72s ease,
+    transform 0.98s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right,
+.about-text p.reveal-right {
+  transform: translate3d(46px, 0, 0) scale(0.975);
+  transition:
+    opacity 0.72s ease,
+    filter 0.72s ease,
+    transform 0.98s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.25s ease;
+}
+
+.reveal-map,
+.map-node.reveal-map {
+  transform: translate3d(0, 52px, 0) scale(0.94);
+  transition:
+    opacity 0.76s ease,
+    filter 0.76s ease,
+    transform 1.08s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-fade,
+.map-arrow.reveal-fade {
+  transition:
+    opacity 0.72s ease,
+    filter 0.72s ease;
+}
+
+.reveal-card.is-visible,
+.reveal-soft.is-visible,
+.reveal-slide.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-map.is-visible {
+  filter: blur(0);
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.reveal-fade.is-visible {
+  filter: blur(0);
+  opacity: 1;
+}
+
+.project-card.reveal-card.has-entered:hover,
+.language-card.reveal-card.has-entered:hover,
+.contact-card.reveal-card.has-entered:hover {
+  transform: var(--tilt, translateY(-8px));
+}
+
+.skill-category.reveal-card.has-entered:hover {
+  transform: var(--tilt, translateY(-4px));
+}
+
+.skill-item.reveal-soft.has-entered:hover {
+  transform: translateY(-4px);
+}
+
+.timeline-item.reveal-slide.has-entered:hover {
+  transform: translateY(-6px);
+}
+
+.about-text p.reveal-right.has-entered:hover {
+  transform: translateX(4px);
 }

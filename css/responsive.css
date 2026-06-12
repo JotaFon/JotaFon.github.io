@@ -47,18 +47,6 @@
     align-items: center;
   }
 
-  .timeline {
-    padding-left: 40px;
-  }
-
-  .timeline::before {
-    left: 15px;
-  }
-
-  .timeline-item::before {
-    left: -52px;
-  }
-
   .job-header {
     flex-direction: column;
     align-items: flex-start;
@@ -69,7 +57,7 @@
     right: 16px;
     transform: none;
     border-radius: 8px;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .nav-links {
@@ -92,7 +80,7 @@
   }
 
   .skill-category {
-    padding: 24px;
+    padding: 22px;
   }
 
   .skill-category:last-child {
@@ -100,18 +88,73 @@
   }
 
   .skill-item {
+    flex: 1 1 128px;
     max-width: none;
+    min-height: 86px;
   }
 
   .projects-grid {
     grid-template-columns: 1fr;
   }
 
-  .project-image {
-    height: 200px;
-  }
-
   .project-placeholder {
     font-size: 60px;
+  }
+}
+
+@media (max-width: 520px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .section-header {
+    margin-bottom: 44px;
+  }
+
+  .navbar {
+    padding: 8px 12px;
+  }
+
+  .nav-links {
+    gap: 12px;
+  }
+
+  .nav-language {
+    gap: 8px;
+  }
+
+  .theme-toggle,
+  .lang-btn {
+    flex-basis: 32px;
+    height: 32px;
+    width: 32px;
+  }
+
+  .nav-links a {
+    white-space: nowrap;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 112px 0 64px;
+  }
+
+  .hero-cta,
+  .hero-cta .btn {
+    width: 100%;
+  }
+
+  .hero-cta .btn {
+    justify-content: center;
+  }
+
+  .skills-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skill-item {
+    min-width: 0;
+    padding: 14px 10px;
   }
 }

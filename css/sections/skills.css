@@ -7,21 +7,25 @@
 }
 
 .skill-category {
-  background: rgba(21, 28, 39, 0.92);
+  background: var(--panel-bg);
   border: 1px solid var(--border-primary);
   border-radius: 8px;
   padding: 28px;
-  transition: all 0.3s ease;
+  overflow: hidden;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
 }
 
 .skill-category:hover {
   border-color: var(--accent-primary);
   box-shadow: 0 18px 48px var(--shadow-primary);
-  transform: translateY(-4px);
+  transform: var(--tilt, translateY(-4px));
 }
 
 .skill-category:last-child {
-  grid-column: span 2;
+  grid-column: auto;
 }
 
 .category-header {
@@ -35,8 +39,8 @@
   width: 52px;
   height: 52px;
   flex: 0 0 52px;
-  background: rgba(249, 115, 22, 0.08);
-  border: 1px solid rgba(249, 115, 22, 0.2);
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.22);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -83,15 +87,25 @@
   min-height: 92px;
   gap: 8px;
   padding: 16px 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(148, 163, 184, 0.08);
+  background: var(--item-bg);
+  border: 1px solid var(--item-border);
   border-radius: 8px;
-  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .skill-item:hover {
-  background: rgba(234, 88, 12, 0.1);
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.28);
   transform: translateY(-4px);
+}
+
+.skill-item:hover .skill-icon-img {
+  transform: scale(1.08);
 }
 
 .skill-icon {
@@ -104,6 +118,7 @@
   height: 34px;
   display: block;
   object-fit: contain;
+  transition: transform 0.25s ease;
 }
 
 .skill-name {
@@ -116,7 +131,7 @@
 .skill-level {
   font-size: 0.75rem;
   color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--item-bg);
   padding: 4px 8px;
   border-radius: 6px;
   margin-top: 4px;
