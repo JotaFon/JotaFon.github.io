@@ -21,33 +21,43 @@
       />
 
       <article
-        class="map-node map-node-painting"
+        class="map-node map-node-education"
         tabindex="0"
-        aria-label="Digital Painting Freelancer experience"
+        aria-label="Systems Analysis and Development education"
       >
         <img src="assets/ilha1.png" alt="" class="map-island" loading="lazy" />
-        <div class="map-card">
-          <div class="job-header">
+        <details class="map-card">
+          <summary class="experience-summary">
             <div>
               <h3 class="job-title" data-i18n="experience.job4.title">
-                Digital Painting Freelancer
+                Systems Analysis and Development
               </h3>
-              <p class="company">Freelance</p>
+              <p class="company">Universidade Positivo</p>
               <p class="job-location" data-i18n="experience.job4.location">
-                Taubaté - SP, Brazil
+                Londrina - PR, Brazil
               </p>
             </div>
             <div class="job-duration" data-i18n="experience.job4.duration">
-              February 2021 - November 2023
+              June 2022 - December 2025
             </div>
+            <i class="fas fa-chevron-down map-toggle-icon" aria-hidden="true"></i>
+          </summary>
+
+          <div class="experience-details-body">
+            <ul class="job-responsibilities">
+              <li data-i18n="experience.job4.point1">
+                This is where I took my first steps in technology, building the
+                foundation for programming logic, web development, databases and
+                software projects.
+              </li>
+              <li data-i18n="experience.job4.point2">
+                The course helped me connect technical learning with practical
+                problem solving and confirmed the path I wanted to follow in
+                development.
+              </li>
+            </ul>
           </div>
-          <ul class="job-responsibilities">
-            <li data-i18n="experience.job4.point1">
-              Managed client communication, creative direction and delivery
-              deadlines for commissioned digital artwork.
-            </li>
-          </ul>
-        </div>
+        </details>
       </article>
 
       <article
@@ -56,9 +66,9 @@
         aria-label="Internship and front-end developer experiences"
       >
         <img src="assets/ilha2.png" alt="" class="map-island" loading="lazy" />
-        <div class="map-card map-card-wide">
-          <div class="map-role">
-            <div class="job-header">
+        <div class="map-card-stack" aria-label="X-Brain experiences">
+          <details class="map-card map-card-wide">
+            <summary class="experience-summary">
               <div>
                 <h3 class="job-title" data-i18n="experience.job3.title">
                   Web Development Intern
@@ -71,23 +81,27 @@
               <div class="job-duration" data-i18n="experience.job3.duration">
                 August 2024 - March 2025
               </div>
-            </div>
-            <div class="job-tech">
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">React</span>
-              <span class="tech-tag">Redux</span>
-            </div>
-            <ul class="job-responsibilities">
-              <li data-i18n="experience.job3.point1">
-                Started in the development area as an intern, supporting the
-                front-end of Claro's sales system with React, JavaScript and
-                Redux.
-              </li>
-            </ul>
-          </div>
+              <i class="fas fa-chevron-down map-toggle-icon" aria-hidden="true"></i>
+            </summary>
 
-          <div class="map-role">
-            <div class="job-header">
+            <div class="experience-details-body">
+              <div class="job-tech">
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Redux</span>
+              </div>
+              <ul class="job-responsibilities">
+                <li data-i18n="experience.job3.point1">
+                  Started in the development area as an intern, supporting the
+                  front-end of Claro's sales system with React, JavaScript and
+                  Redux.
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="map-card map-card-wide">
+            <summary class="experience-summary">
               <div>
                 <h3 class="job-title" data-i18n="experience.job2.title">
                   Junior Front-end Developer
@@ -100,19 +114,24 @@
               <div class="job-duration" data-i18n="experience.job2.duration">
                 April 2025 - February 2026
               </div>
+              <i class="fas fa-chevron-down map-toggle-icon" aria-hidden="true"></i>
+            </summary>
+
+            <div class="experience-details-body">
+              <div class="job-tech">
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Redux</span>
+              </div>
+              <ul class="job-responsibilities">
+                <li data-i18n="experience.job2.point1">
+                  First professional role in development, working on the
+                  front-end of Claro's sales system with React, JavaScript and
+                  Redux.
+                </li>
+              </ul>
             </div>
-            <div class="job-tech">
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">React</span>
-              <span class="tech-tag">Redux</span>
-            </div>
-            <ul class="job-responsibilities">
-              <li data-i18n="experience.job2.point1">
-                First professional role in development, working on the front-end
-                of Claro's sales system with React, JavaScript and Redux.
-              </li>
-            </ul>
-          </div>
+          </details>
         </div>
       </article>
 
@@ -122,8 +141,8 @@
         aria-label="Full Stack Developer experience"
       >
         <img src="assets/ilha3.png" alt="" class="map-island" loading="lazy" />
-        <div class="map-card">
-          <div class="job-header">
+        <details class="map-card">
+          <summary class="experience-summary">
             <div>
               <h3 class="job-title" data-i18n="experience.job1.title">
                 Full Stack Developer
@@ -136,27 +155,31 @@
             <div class="job-duration" data-i18n="experience.job1.duration">
               March 2026 - Present
             </div>
+            <i class="fas fa-chevron-down map-toggle-icon" aria-hidden="true"></i>
+          </summary>
+
+          <div class="experience-details-body">
+            <div class="job-tech">
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">AdonisJS</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Redux</span>
+              <span class="tech-tag">Vite</span>
+              <span class="tech-tag">React Native</span>
+            </div>
+            <ul class="job-responsibilities">
+              <li data-i18n="experience.job1.point1">
+                Developing front-end, back-end and mobile features for an
+                application that manages fleets, trucks and drivers.
+              </li>
+              <li data-i18n="experience.job1.point2">
+                Working with TypeScript, AdonisJS, PostgreSQL, React, Redux,
+                Vite and React Native across web and mobile flows.
+              </li>
+            </ul>
           </div>
-          <div class="job-tech">
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">AdonisJS</span>
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">React</span>
-            <span class="tech-tag">Redux</span>
-            <span class="tech-tag">Vite</span>
-            <span class="tech-tag">React Native</span>
-          </div>
-          <ul class="job-responsibilities">
-            <li data-i18n="experience.job1.point1">
-              Developing front-end, back-end and mobile features for an
-              application that manages fleets, trucks and drivers.
-            </li>
-            <li data-i18n="experience.job1.point2">
-              Working with TypeScript, AdonisJS, PostgreSQL, React, Redux, Vite
-              and React Native across web and mobile flows.
-            </li>
-          </ul>
-        </div>
+        </details>
       </article>
     </div>
   </div>

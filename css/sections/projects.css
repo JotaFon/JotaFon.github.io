@@ -134,8 +134,9 @@
 
 .project-points {
   list-style: none;
-  margin: 0 0 20px;
+  margin: 0 0 26px;
   padding: 0;
+  padding-bottom: 2px;
   flex: 1;
 }
 
@@ -167,12 +168,13 @@
 .project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding-top: 2px;
 }
 
 .tech-tag {
-  padding: 6px 14px;
+  padding: 7px 15px;
   background: rgba(212, 175, 55, 0.1);
   color: var(--accent-primary);
   font-size: 0.8rem;

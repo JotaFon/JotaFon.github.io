@@ -68,6 +68,8 @@ const translations = {
       "Desenvolvimento front-end, back-end e mobile de uma aplicação para gerenciamento de frotas, caminhões e caminhoneiros.",
     "experience.job1.point2":
       "Atuação com TypeScript, AdonisJS, PostgreSQL, React, Redux, Vite e React Native em fluxos web e mobile.",
+    "experience.xbrain.title": "Desenvolvedor Front-end",
+    "experience.xbrain.duration": "Agosto 2024 - Fevereiro 2026",
     "experience.job2.title": "Desenvolvedor Front-end Junior",
     "experience.job2.location": "Londrina - PR, Brasil",
     "experience.job2.duration": "Abril 2025 - Fevereiro 2026",
@@ -82,11 +84,13 @@ const translations = {
       "Início na área de desenvolvimento como estagiário, apoiando o front-end do sistema de vendas da Claro com React, JavaScript e Redux.",
     "experience.job3.point2":
       "Participação em rotinas reais de projeto, revisão de código e entregas iterativas com o time de desenvolvimento.",
-    "experience.job4.title": "Freelancer de Pintura Digital",
-    "experience.job4.location": "Taubaté - SP, Brasil",
-    "experience.job4.duration": "Fevereiro 2021 - Novembro 2023",
+    "experience.job4.title": "An&aacute;lise e Desenvolvimento de Sistemas",
+    "experience.job4.location": "Londrina - PR, Brasil",
+    "experience.job4.duration": "Junho 2022 - Dezembro 2025",
     "experience.job4.point1":
-      "Gestão de comunicação com clientes, direção criativa e prazos de entrega para artes digitais sob demanda.",
+      "Foi onde comecei meus primeiros passos na tecnologia, construindo a base de lógica de programação, desenvolvimento web, bancos de dados e projetos de software.",
+    "experience.job4.point2":
+      "O curso me ajudou a conectar aprendizado técnico com resolução prática de problemas e confirmou o caminho que eu queria seguir na área de desenvolvimento.",
     "contact.title": "Vamos Conversar?",
     "contact.linkedin": "Vamos nos conectar!",
     "contact.github": "Confira meus projetos",
@@ -162,6 +166,8 @@ const translations = {
       "Entwicklung von Front-end-, Back-end- und Mobile-Funktionen für eine Anwendung zur Verwaltung von Flotten, Lkw und Fahrern.",
     "experience.job1.point2":
       "Arbeit mit TypeScript, AdonisJS, PostgreSQL, React, Redux, Vite und React Native in Web- und Mobile-Flows.",
+    "experience.xbrain.title": "Front-end Entwickler",
+    "experience.xbrain.duration": "August 2024 - Februar 2026",
     "experience.job2.title": "Junior Front-end Entwickler",
     "experience.job2.location": "Londrina - PR, Brasilien",
     "experience.job2.duration": "April 2025 - Februar 2026",
@@ -176,11 +182,13 @@ const translations = {
       "Einstieg in die Entwicklung als Praktikant, mit Unterstützung am Front-end des Claro-Vertriebssystems mit React, JavaScript und Redux.",
     "experience.job3.point2":
       "Teilnahme an realen Projektroutinen, Code Reviews und iterativer Lieferung mit dem Entwicklungsteam.",
-    "experience.job4.title": "Freiberuflicher Digitalmaler",
-    "experience.job4.location": "Taubaté - SP, Brasilien",
-    "experience.job4.duration": "Februar 2021 - November 2023",
+    "experience.job4.title": "Systemanalyse und -entwicklung",
+    "experience.job4.location": "Londrina - PR, Brasilien",
+    "experience.job4.duration": "Juni 2022 - Dezember 2025",
     "experience.job4.point1":
-      "Management von Kundenkommunikation, kreativer Richtung und Lieferfristen für beauftragte digitale Kunst.",
+      "Dort habe ich meine ersten Schritte in der Technologie gemacht und Grundlagen in Programmierlogik, Webentwicklung, Datenbanken und Softwareprojekten aufgebaut.",
+    "experience.job4.point2":
+      "Der Kurs half mir, technisches Lernen mit praktischer Problemlösung zu verbinden, und bestätigte den Weg, den ich in der Entwicklung verfolgen wollte.",
     "contact.title": "Lass uns sprechen?",
     "contact.linkedin": "Lass uns vernetzen!",
     "contact.github": "Schau dir meine Projekte an",
@@ -189,12 +197,50 @@ const translations = {
 };
 
 const originalContent = {};
+const navLabels = {
+  en: {
+    "nav.home": "Home",
+    "nav.about": "About",
+    "nav.skills": "Skills",
+    "nav.projects": "Projects",
+    "nav.experience": "Experience",
+    "nav.contact": "Contact",
+  },
+  pt: {
+    "nav.home": "In\u00edcio",
+    "nav.about": "Sobre",
+    "nav.skills": "Skills",
+    "nav.projects": "Projetos",
+    "nav.experience": "Experi\u00eancia",
+    "nav.contact": "Contato",
+  },
+  de: {
+    "nav.home": "Start",
+    "nav.about": "\u00dcber mich",
+    "nav.skills": "F\u00e4higkeiten",
+    "nav.projects": "Projekte",
+    "nav.experience": "Erfahrung",
+    "nav.contact": "Kontakt",
+  },
+};
 
 const storeOriginalContent = () => {
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     const key = element.getAttribute("data-i18n");
 
     originalContent[key] = element.innerHTML;
+  });
+};
+
+const syncNavLabels = (lang) => {
+  const labels = navLabels[lang] || navLabels.en;
+
+  document.querySelectorAll(".nav-links [data-i18n]").forEach((element) => {
+    const key = element.getAttribute("data-i18n");
+
+    if (labels[key]) {
+      element.textContent = labels[key];
+    }
   });
 };
 
@@ -217,6 +263,8 @@ const setLanguage = (lang) => {
       element.innerHTML = translations[lang][key];
     }
   });
+
+  syncNavLabels(lang);
 
   document.querySelectorAll(".lang-btn").forEach((btn) => {
     btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);

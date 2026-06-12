@@ -133,16 +133,16 @@
   z-index: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.35s ease;
   background: radial-gradient(
-    220px circle at var(--spotlight-x) var(--spotlight-y),
-    rgba(212, 175, 55, 0.16),
-    transparent 58%
+    150px circle at var(--spotlight-x) var(--spotlight-y),
+    rgba(212, 175, 55, 0.055),
+    transparent 64%
   );
 }
 
 .interactive-surface:hover::after {
-  opacity: 1;
+  opacity: 0.55;
 }
 
 .interactive-surface > * {
@@ -184,7 +184,8 @@
 .section-header.reveal-soft,
 .skill-item.reveal-soft,
 .project-points li.reveal-soft,
-.tech-tag.reveal-soft {
+.tech-tag.reveal-soft,
+.about-text p.reveal-right {
   transform: translate3d(0, 32px, 0) scale(0.975);
   transition:
     opacity 0.68s ease,
@@ -212,14 +213,12 @@
     transform 0.98s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal-right,
-.about-text p.reveal-right {
+.reveal-right {
   transform: translate3d(46px, 0, 0) scale(0.975);
   transition:
     opacity 0.72s ease,
     filter 0.72s ease,
-    transform 0.98s cubic-bezier(0.16, 1, 0.3, 1),
-    color 0.25s ease;
+    transform 0.98s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-map,
@@ -257,11 +256,11 @@
 .project-card.reveal-card.has-entered:hover,
 .language-card.reveal-card.has-entered:hover,
 .contact-card.reveal-card.has-entered:hover {
-  transform: var(--tilt, translateY(-8px));
+  transform: var(--tilt, translateY(-5px));
 }
 
 .skill-category.reveal-card.has-entered:hover {
-  transform: var(--tilt, translateY(-4px));
+  transform: var(--tilt, translateY(-3px));
 }
 
 .skill-item.reveal-soft.has-entered:hover {
@@ -270,8 +269,4 @@
 
 .timeline-item.reveal-slide.has-entered:hover {
   transform: translateY(-6px);
-}
-
-.about-text p.reveal-right.has-entered:hover {
-  transform: translateX(4px);
 }

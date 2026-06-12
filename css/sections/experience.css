@@ -1,7 +1,20 @@
+#experience {
+  padding-bottom: clamp(48px, 4vw, 72px);
+}
+
+#experience + #contact {
+  padding-top: clamp(48px, 4vw, 72px);
+}
+
 .experience-map {
-  min-height: 690px;
+  align-items: start;
+  display: grid;
+  gap: clamp(20px, 3vw, 36px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  min-height: clamp(470px, 39vw, 580px);
   max-width: 1120px;
   margin: 0 auto;
+  padding-top: 18px;
   position: relative;
 }
 
@@ -18,56 +31,56 @@
 }
 
 .map-arrow {
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.22));
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.18));
   pointer-events: none;
   position: absolute;
-  z-index: 1;
+  z-index: 0;
 }
 
 .map-arrow-one {
-  left: 34%;
-  top: 10%;
-  width: min(24vw, 260px);
-  transform: rotate(2deg);
+  left: 36%;
+  top: 2%;
+  width: min(22vw, 240px);
+  transform: rotate(-6deg);
 }
 
 .map-arrow-two {
-  left: 44%;
-  top: 40%;
+  left: 48%;
+  top: 30%;
   width: min(13vw, 130px);
-  transform: rotate(6deg);
+  transform: rotate(-4deg);
 }
 
 .map-node {
+  --card-gap: 20px;
+  --island-half: 130px;
   background: transparent;
   border: 0;
   cursor: pointer;
   outline: none;
-  position: absolute;
+  position: relative;
+  width: 100%;
   z-index: 2;
 }
 
-.map-node-painting {
-  left: 6%;
-  top: 6%;
-  width: min(26vw, 305px);
+.map-node-education {
+  left: 40%;
 }
 
 .map-node-frontend {
-  left: 55%;
-  top: 16%;
-  width: min(26vw, 305px);
+  left: 60%;
 }
 
 .map-node-fullstack {
-  left: 55%;
-  top: 60%;
-  width: min(28vw, 305px);
+  right: 40%;
+  top: 54%;
 }
 
 .map-island {
   display: block;
-  width: 100%;
+  margin: 0 auto;
+  max-width: 260px;
+  width: min(100%, 260px);
   transition:
     filter 0.3s ease,
     transform 0.35s ease;
@@ -87,57 +100,111 @@
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.28),
     0 0 0 1px rgba(212, 175, 55, 0.1);
-  max-width: 430px;
-  opacity: 0;
-  padding: 22px;
-  pointer-events: none;
+  margin: 0;
+  max-width: 420px;
+  opacity: 1;
+  overflow: hidden;
+  padding: 0;
+  pointer-events: auto;
   position: absolute;
   top: 50%;
-  transform: translate(12px, -50%) scale(0.97);
+  transform: translateY(-50%);
   transition:
-    opacity 0.24s ease,
-    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-    visibility 0.24s ease;
-  visibility: hidden;
-  width: min(430px, 36vw);
+    border-color 0.24s ease,
+    box-shadow 0.24s ease,
+    transform 0.24s ease;
+  visibility: visible;
+  width: min(420px, 38vw);
   z-index: 5;
 }
 
+.map-node-education .map-card {
+  right: calc(50% + var(--island-half) + var(--card-gap));
+}
+
+.map-node-fullstack .map-card {
+  left: calc(50% + var(--island-half) + var(--card-gap));
+}
+
 .map-card-wide {
-  max-width: 460px;
-  width: min(460px, 38vw);
+  max-width: 440px;
+  width: min(440px, 40vw);
 }
 
-.map-node:hover .map-card,
-.map-node:focus-within .map-card,
-.map-node:focus-visible .map-card {
-  opacity: 1;
-  transform: translate(0, -50%) scale(1);
-  visibility: visible;
-}
-
-.map-node-painting .map-card {
-  right: calc(100% + 18px);
-  transform: translate(-12px, -50%) scale(0.97);
-}
-
-.map-node-painting:hover .map-card,
-.map-node-painting:focus-within .map-card,
-.map-node-painting:focus-visible .map-card {
-  transform: translate(0, -50%) scale(1);
-}
-
-.map-node-frontend .map-card,
-.map-node-fullstack .map-card {
-  left: calc(100% + 18px);
-}
-
-.map-node-frontend .map-card {
-  top: 44%;
-}
-
-.map-node-fullstack .map-card {
+.map-card-stack {
+  display: grid;
+  gap: 12px;
+  left: calc(50% + var(--island-half) + var(--card-gap));
+  max-width: 440px;
+  position: absolute;
   top: 50%;
+  transform: translateY(-50%);
+  width: min(440px, 40vw);
+  z-index: 5;
+}
+
+.map-card-stack .map-card {
+  max-width: none;
+  position: relative;
+  top: auto;
+  transform: none;
+  width: 100%;
+}
+
+.map-card:hover,
+.map-card[open] {
+  border-color: rgba(212, 175, 55, 0.46);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.26),
+    0 0 0 1px rgba(212, 175, 55, 0.18);
+}
+
+.experience-summary {
+  align-items: flex-start;
+  cursor: pointer;
+  display: grid;
+  gap: 10px 12px;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  list-style: none;
+  padding: 15px;
+}
+
+.experience-summary::-webkit-details-marker {
+  display: none;
+}
+
+.experience-summary .job-title {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.experience-summary .job-location {
+  font-size: 0.82rem;
+}
+
+.experience-summary .job-duration {
+  align-self: start;
+  font-size: 0.76rem;
+  justify-self: end;
+  max-width: 170px;
+  text-align: right;
+  white-space: normal;
+}
+
+.map-toggle-icon {
+  color: var(--accent-primary);
+  font-size: 0.82rem;
+  margin-top: 5px;
+  transition: transform 0.24s ease;
+}
+
+.map-card[open] .map-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.experience-details-body {
+  border-top: 1px solid rgba(212, 175, 55, 0.16);
+  padding: 0 15px 15px;
 }
 
 .map-role + .map-role {
@@ -221,8 +288,12 @@
 @media (max-width: 900px) {
   .experience-map {
     display: grid;
-    gap: 40px;
+    gap: 24px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    max-width: 520px;
     min-height: auto;
+    padding-top: 0;
   }
 
   .experience-map::before,
@@ -231,27 +302,39 @@
   }
 
   .map-node,
-  .map-node-painting,
+  .map-node-education,
   .map-node-frontend,
   .map-node-fullstack {
+    display: grid;
+    justify-items: center;
     left: auto;
-    position: relative;
+    margin-top: 0;
     right: auto;
     top: auto;
-    width: min(100%, 460px);
+    width: min(100%, 420px);
   }
 
   .map-node:nth-of-type(2n) {
-    justify-self: end;
+    justify-self: center;
+  }
+
+  .map-island {
+    max-width: 200px;
+    width: min(74vw, 200px);
+  }
+
+  .map-node:hover .map-island,
+  .map-node:focus-visible .map-island {
+    transform: translateY(-3px);
   }
 
   .map-card,
   .map-card-wide,
-  .map-node-painting .map-card,
-  .map-node-frontend .map-card,
+  .map-card-stack,
+  .map-node-education .map-card,
   .map-node-fullstack .map-card {
     left: auto;
-    margin-top: 14px;
+    margin-top: 10px;
     max-width: none;
     opacity: 1;
     pointer-events: auto;
@@ -261,5 +344,103 @@
     transform: none;
     visibility: visible;
     width: 100%;
+  }
+
+  .map-card-stack {
+    display: grid;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .map-card-stack .map-card {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  #experience {
+    padding-bottom: 34px;
+  }
+
+  #experience + #contact {
+    padding-top: 38px;
+  }
+
+  .experience-map {
+    gap: 20px;
+    max-width: 360px;
+  }
+
+  .map-node,
+  .map-node-education,
+  .map-node-frontend,
+  .map-node-fullstack {
+    justify-self: center;
+    width: 100%;
+  }
+
+  .map-node:nth-of-type(2n) {
+    justify-self: center;
+  }
+
+  .map-card,
+  .map-card-wide,
+  .map-card-stack {
+    padding: 0;
+    width: 100%;
+  }
+
+  .map-island {
+    max-width: 168px;
+    width: min(68vw, 168px);
+  }
+
+  .experience-summary {
+    gap: 8px 10px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 12px;
+  }
+
+  .experience-summary .job-duration {
+    grid-column: 1 / -1;
+    justify-self: start;
+    max-width: none;
+    text-align: left;
+  }
+
+  .experience-details-body {
+    padding: 0 12px 12px;
+  }
+
+  .job-header {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .job-title {
+    font-size: 0.96rem;
+  }
+
+  .company {
+    font-size: 0.84rem;
+  }
+
+  .job-duration,
+  .job-location,
+  .job-responsibilities li {
+    font-size: 0.78rem;
+  }
+
+  .job-responsibilities {
+    margin-top: 12px;
+  }
+
+  .job-responsibilities li {
+    padding-left: 18px;
+  }
+
+  .job-tech {
+    gap: 8px;
+    margin-top: 12px;
   }
 }

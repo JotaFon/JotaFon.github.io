@@ -208,7 +208,7 @@ const initCardRevealAnimation = () => {
 
   revealElements({
     selector: ".about-text p",
-    revealClass: "reveal-right",
+    revealClass: "reveal-soft",
     delayStep: 80,
     maxDelay: 320,
   });
@@ -292,8 +292,8 @@ const initInteractiveCards = () => {
       const rect = card.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
-      const rotateX = ((y / rect.height) - 0.5) * -4;
-      const rotateY = ((x / rect.width) - 0.5) * 4;
+      const rotateX = ((y / rect.height) - 0.5) * -1.4;
+      const rotateY = ((x / rect.width) - 0.5) * 1.4;
 
       card.style.setProperty("--spotlight-x", `${x}px`);
       card.style.setProperty("--spotlight-y", `${y}px`);
@@ -305,7 +305,7 @@ const initInteractiveCards = () => {
       ) {
         card.style.setProperty(
           "--tilt",
-          `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+          `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
         );
       }
     });
