@@ -221,8 +221,7 @@ const initCardRevealAnimation = () => {
   });
 
   revealElements({
-    selector:
-      ".project-points li, .project-tags .tech-tag, .job-tech .tech-tag",
+    selector: ".job-tech .tech-tag",
     revealClass: "reveal-soft",
     delayStep: 55,
     maxDelay: 330,
@@ -244,7 +243,10 @@ const initBackgroundScroll = () => {
       Math.round(s + (end[i] - s) * scrollPercent),
     );
 
-    document.body.style.background = `rgb(${currentColor.join(",")})`;
+    document.documentElement.style.setProperty(
+      "--page-bg-current",
+      currentColor.join(","),
+    );
   };
 
   window.addEventListener("scroll", updateBackground, { passive: true });
@@ -279,13 +281,19 @@ const initKonamiCode = () => {
 };
 
 const initInteractiveCards = () => {
-  if (!window.matchMedia("(pointer: fine)").matches) return;
+  if (!window.matchMedia("(pointer: fine)").matches) {
 
-  const cards = document.querySelectorAll(
-    ".skill-category, .skill-item, .project-card, .language-card, .contact-card, .hero-highlight",
-  );
+    return;
+  }
+
+  const cards = [
+    ...document.querySelectorAll(
+      ".skill-category, .skill-item, .project-card, .language-card, .contact-card, .hero-highlight",
+    ),
+  ].filter((card) => !card.dataset.interactiveBound);
 
   cards.forEach((card) => {
+    card.dataset.interactiveBound = "true";
     card.classList.add("interactive-surface");
 
     card.addEventListener("pointermove", (event) => {
@@ -298,11 +306,23 @@ const initInteractiveCards = () => {
       card.style.setProperty("--spotlight-x", `${x}px`);
       card.style.setProperty("--spotlight-y", `${y}px`);
 
-      if (
-        card.classList.contains("project-card") ||
-        card.classList.contains("skill-category") ||
-        card.classList.contains("language-card")
-      ) {
+      if (card.classList.contains("language-card")) {
+        const xProgress = x / rect.width - 0.5;
+        const yProgress = y / rect.height - 0.5;
+        const shineAngle = 118 + xProgress * 24 - yProgress * 12;
+        const shineMoveX = `${xProgress * -34}%`;
+        const shineMoveY = `${yProgress * -24}%`;
+
+        card.style.setProperty("--mouse-rotate-x", `${rotateX}deg`);
+        card.style.setProperty("--mouse-rotate-y", `${rotateY}deg`);
+        card.style.setProperty("--shine-angle", `${shineAngle}deg`);
+        card.style.setProperty("--shine-move-x", shineMoveX);
+        card.style.setProperty("--shine-move-y", shineMoveY);
+
+        return;
+      }
+
+      if (card.classList.contains("skill-category")) {
         card.style.setProperty(
           "--tilt",
           `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
@@ -312,7 +332,344 @@ const initInteractiveCards = () => {
 
     card.addEventListener("pointerleave", () => {
       card.style.removeProperty("--tilt");
+      card.style.removeProperty("--mouse-rotate-x");
+      card.style.removeProperty("--mouse-rotate-y");
+      card.style.removeProperty("--shine-angle");
+      card.style.removeProperty("--shine-move-x");
+      card.style.removeProperty("--shine-move-y");
     });
+  });
+};
+
+const initProjectsCarousel = () => {
+  document.querySelectorAll("[data-project-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector(".projects-grid");
+    const originalSlides = [...carousel.querySelectorAll(".project-card")];
+    const prevButton = carousel.querySelector("[data-project-prev]");
+    const nextButton = carousel.querySelector("[data-project-next]");
+    const viewport = carousel.querySelector(".projects-viewport");
+    let positionX = 0;
+    let pointerStartX = 0;
+    let pointerStartY = 0;
+    let pointerLastX = 0;
+    let pointerLastTime = 0;
+    let velocityX = 0;
+    let momentumFrame = 0;
+    let isDragging = false;
+    let isButtonMoving = false;
+    let suppressClick = false;
+
+    if (!track || !originalSlides.length || !viewport) {
+
+      return;
+    }
+
+    if (carousel.dataset.carouselBound) {
+
+      return;
+    }
+
+    carousel.dataset.carouselBound = "true";
+
+    originalSlides.forEach((slide, index) => {
+      slide.dataset.projectIndex = String(index);
+      slide.setAttribute("aria-hidden", "false");
+    });
+
+    const detailRevealElements = [
+      ...carousel.querySelectorAll(".project-points li, .project-tags .tech-tag"),
+    ];
+
+    detailRevealElements.forEach((element) => {
+      element.classList.remove("reveal-soft", "is-visible", "has-entered");
+      element.removeAttribute("data-reveal-bound");
+      element.removeAttribute("data-reveal-delay");
+      element.style.transitionDelay = "";
+    });
+
+    const createClone = (slide, index) => {
+      const clone = slide.cloneNode(true);
+
+      clone.classList.add("is-clone");
+      clone.classList.remove(
+        "reveal-card",
+        "is-active",
+        "is-visible",
+        "has-entered",
+      );
+      clone.removeAttribute("data-interactive-bound");
+      clone
+        .querySelectorAll(".project-points li, .project-tags .tech-tag")
+        .forEach((element) => {
+          element.classList.remove("reveal-soft", "is-visible", "has-entered");
+          element.removeAttribute("data-reveal-bound");
+          element.removeAttribute("data-reveal-delay");
+          element.style.transitionDelay = "";
+        });
+      clone.dataset.projectIndex = String(index);
+      clone.setAttribute("aria-hidden", "true");
+
+      return clone;
+    };
+
+    const beforeFragment = document.createDocumentFragment();
+    const afterFragment = document.createDocumentFragment();
+
+    originalSlides.forEach((slide, index) => {
+      beforeFragment.appendChild(createClone(slide, index));
+      afterFragment.appendChild(createClone(slide, index));
+    });
+
+    track.insertBefore(beforeFragment, originalSlides[0]);
+    track.appendChild(afterFragment);
+
+    const slides = [...track.querySelectorAll(".project-card")];
+    const middleStartIndex = originalSlides.length;
+
+    const getLoopMetrics = () => {
+      const middleStartSlide = slides[middleStartIndex];
+      const nextSetStartSlide = slides[middleStartIndex + originalSlides.length];
+      const middleOffset = middleStartSlide?.offsetLeft ?? 0;
+      const loopWidth = nextSetStartSlide
+        ? nextSetStartSlide.offsetLeft - middleOffset
+        : track.scrollWidth / 3;
+
+      return { middleOffset, loopWidth };
+    };
+
+    const setTrackPosition = (nextPositionX, { animate = false } = {}) => {
+      positionX = nextPositionX;
+      const renderedPositionX = Math.round(positionX);
+
+      track.style.transition = animate
+        ? "transform 0.42s cubic-bezier(0.16, 1, 0.3, 1)"
+        : "none";
+      track.style.transform = `translateX(${renderedPositionX}px)`;
+    };
+
+    const normalizePosition = () => {
+      const { middleOffset, loopWidth } = getLoopMetrics();
+
+      if (!loopWidth) {
+
+        return;
+      }
+
+      while (positionX <= -(middleOffset + loopWidth)) {
+        positionX += loopWidth;
+      }
+
+      while (positionX > -middleOffset) {
+        positionX -= loopWidth;
+      }
+
+      setTrackPosition(positionX);
+    };
+
+    const updateNearestSlide = () => {
+      const viewportCenter = viewport.clientWidth / 2;
+      let activeProjectIndex = originalSlides[0].dataset.projectIndex;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      slides.forEach((slide) => {
+        const slideCenter = slide.offsetLeft + positionX + slide.offsetWidth / 2;
+        const distance = Math.abs(viewportCenter - slideCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          activeProjectIndex = slide.dataset.projectIndex;
+        }
+      });
+
+      slides.forEach((slide) => {
+        slide.classList.toggle(
+          "is-active",
+          slide.dataset.projectIndex === activeProjectIndex,
+        );
+      });
+    };
+
+    const stopMomentum = () => {
+      if (!momentumFrame) {
+
+        return;
+      }
+
+      window.cancelAnimationFrame(momentumFrame);
+      momentumFrame = 0;
+    };
+
+    const startMomentum = () => {
+      stopMomentum();
+
+      const runMomentum = () => {
+        velocityX *= 0.94;
+
+        if (Math.abs(velocityX) < 0.04) {
+          momentumFrame = 0;
+
+          return;
+        }
+
+        setTrackPosition(positionX + velocityX * 16);
+        normalizePosition();
+        updateNearestSlide();
+        momentumFrame = window.requestAnimationFrame(runMomentum);
+      };
+
+      if (Math.abs(velocityX) < 0.04) {
+
+        return;
+      }
+
+      momentumFrame = window.requestAnimationFrame(runMomentum);
+    };
+
+    const moveTrack = (direction) => {
+      if (isButtonMoving) {
+
+        return;
+      }
+
+      const { loopWidth } = getLoopMetrics();
+      const step = loopWidth / originalSlides.length;
+
+      if (!step) {
+
+        return;
+      }
+
+      isButtonMoving = true;
+      stopMomentum();
+      setTrackPosition(positionX - direction * step, { animate: true });
+    };
+
+    prevButton?.addEventListener("click", () => {
+      moveTrack(-1);
+    });
+
+    nextButton?.addEventListener("click", () => {
+      moveTrack(1);
+    });
+
+    track.addEventListener("transitionend", (event) => {
+      if (event.target !== track) {
+
+        return;
+      }
+
+      if (event.propertyName !== "transform") {
+
+        return;
+      }
+
+      normalizePosition();
+      updateNearestSlide();
+      isButtonMoving = false;
+    });
+
+    viewport.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) {
+
+        return;
+      }
+
+      pointerStartX = event.clientX;
+      pointerStartY = event.clientY;
+      pointerLastX = event.clientX;
+      pointerLastTime = event.timeStamp;
+      velocityX = 0;
+      isDragging = true;
+      viewport.setPointerCapture(event.pointerId);
+      viewport.classList.add("is-dragging");
+      stopMomentum();
+    });
+
+    viewport.addEventListener("pointermove", (event) => {
+      if (!isDragging) {
+
+        return;
+      }
+
+      const deltaX = event.clientX - pointerStartX;
+      const deltaY = event.clientY - pointerStartY;
+      const moveX = event.clientX - pointerLastX;
+      const elapsed = event.timeStamp - pointerLastTime;
+
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        event.preventDefault();
+      }
+
+      if (elapsed > 0) {
+        velocityX = moveX / elapsed;
+      }
+
+      pointerLastX = event.clientX;
+      pointerLastTime = event.timeStamp;
+      setTrackPosition(positionX + moveX);
+      normalizePosition();
+      updateNearestSlide();
+    });
+
+    const stopDragging = (event) => {
+      if (!isDragging) {
+
+        return;
+      }
+
+      const deltaX = event.clientX - pointerStartX;
+
+      isDragging = false;
+      suppressClick = Math.abs(deltaX) > 6;
+      viewport.classList.remove("is-dragging");
+
+      if (viewport.hasPointerCapture(event.pointerId)) {
+        viewport.releasePointerCapture(event.pointerId);
+      }
+
+      if (suppressClick) {
+        window.setTimeout(() => {
+          suppressClick = false;
+        });
+      }
+
+      startMomentum();
+    };
+
+    viewport.addEventListener("pointerup", stopDragging);
+    viewport.addEventListener("pointercancel", (event) => {
+      isDragging = false;
+      viewport.classList.remove("is-dragging");
+
+      if (viewport.hasPointerCapture(event.pointerId)) {
+        viewport.releasePointerCapture(event.pointerId);
+      }
+    });
+
+    track.addEventListener("click", (event) => {
+      if (!suppressClick) {
+
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      suppressClick = false;
+    }, true);
+
+    window.addEventListener("resize", () => {
+      const { middleOffset } = getLoopMetrics();
+
+      setTrackPosition(-middleOffset);
+      updateNearestSlide();
+    });
+
+    const { middleOffset } = getLoopMetrics();
+
+    setTrackPosition(-middleOffset);
+    normalizePosition();
+    updateNearestSlide();
+    initInteractiveCards();
   });
 };
 
@@ -353,6 +710,75 @@ const initThemeToggle = () => {
   });
 
   applyTheme(initialTheme);
+};
+
+const initMobileSidebar = () => {
+  const navbar = document.getElementById("navbar");
+  const toggleButton = navbar?.querySelector(".mobile-menu-toggle");
+  const backdrop = navbar?.querySelector(".mobile-nav-backdrop");
+  const menuIcon = navbar?.querySelector(".mobile-menu-icon");
+  const mobileQuery = window.matchMedia("(max-width: 768px)");
+  const labels = {
+    en: {
+      close: "Close navigation menu",
+      open: "Open navigation menu",
+    },
+    pt: {
+      close: "Fechar menu de navegação",
+      open: "Abrir menu de navegação",
+    },
+    de: {
+      close: "Navigationsmenü schließen",
+      open: "Navigationsmenü öffnen",
+    },
+  };
+
+  if (!navbar || !toggleButton || !backdrop || !menuIcon) return;
+
+  const getLabels = () => {
+    const lang = localStorage.getItem("language") || "en";
+
+    return labels[lang] || labels.en;
+  };
+
+  const setOpen = (isOpen) => {
+    const { close, open } = getLabels();
+
+    navbar.classList.toggle("is-open", isOpen);
+    document.body.classList.toggle("mobile-nav-open", isOpen);
+    toggleButton.setAttribute("aria-expanded", String(isOpen));
+    toggleButton.setAttribute("aria-label", isOpen ? close : open);
+    menuIcon.classList.toggle("fa-bars", !isOpen);
+    menuIcon.classList.toggle("fa-xmark", isOpen);
+  };
+
+  toggleButton.addEventListener("click", () => {
+    setOpen(!navbar.classList.contains("is-open"));
+  });
+
+  backdrop.addEventListener("click", () => setOpen(false));
+
+  navbar.querySelectorAll(".nav-links a").forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+
+  navbar.querySelectorAll(".lang-btn").forEach((button) => {
+    button.addEventListener("click", () => setOpen(false));
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      setOpen(false);
+    }
+  });
+
+  mobileQuery.addEventListener("change", ({ matches }) => {
+    if (!matches) {
+      setOpen(false);
+    }
+  });
+
+  setOpen(false);
 };
 
 const addStyles = (styles) => {

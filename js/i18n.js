@@ -40,11 +40,18 @@ const translations = {
     "projects.viewBlocked": "Site Interno",
     "projects.helpus.type": "Aplicação Web",
     "projects.helpus.description":
-      "Aplicação web para gerenciamento de ajuda comunitária, com foco em documentação clara, fluxos colaborativos e interface acessível.",
+      "Aplicação web para gerenciamento de ajuda comunitária, com fluxos colaborativos e interface acessível.",
     "projects.helpus.point1":
-      "Documentação estruturada com conteúdo MDX reutilizável.",
+      "Estrutura reutilizável para iniciativas comunitárias e fluxos de equipes internas.",
     "projects.helpus.point2":
       "Interface pensada para equipes internas e clareza operacional.",
+    "projects.cargadocs.type": "Biblioteca Interna de Docs",
+    "projects.cargadocs.description":
+      "Site interno para uma biblioteca de documentação do sistema, criado para manter referências técnicas fáceis de navegar e manter.",
+    "projects.cargadocs.point1":
+      "Experiência centralizada de documentação para times de produto e desenvolvimento.",
+    "projects.cargadocs.point2":
+      "Suporte desktop local-first com uma API leve e armazenamento embarcado.",
     "projects.previsios.type": "Landing Page",
     "projects.previsios.description":
       "Landing page responsiva para um produto de previsão do tempo, criada para apresentar o app com clareza e manter a experiência rápida no mobile.",
@@ -52,6 +59,8 @@ const translations = {
       "Construída com Next.js e Tailwind para entrega responsiva.",
     "projects.previsios.point2":
       "Movimento e layout usados para apoiar a narrativa do produto.",
+    "projects.carousel.previous": "Projeto anterior",
+    "projects.carousel.next": "Próximo projeto",
     "languages.text": "Escolha um idioma",
     "languages.title": "Idiomas",
     "languages.portuguese": "Português",
@@ -138,11 +147,18 @@ const translations = {
     "projects.viewBlocked": "Interne Seite",
     "projects.helpus.type": "Webanwendung",
     "projects.helpus.description":
-      "Webanwendung für gemeinschaftliches Hilfsmanagement mit Fokus auf klare Dokumentation, kollaborative Abläufe und zugängliche Oberfläche.",
+      "Webanwendung für gemeinschaftliches Hilfsmanagement mit kollaborativen Abläufen und zugänglicher Oberfläche.",
     "projects.helpus.point1":
-      "Strukturierte Dokumentation mit wiederverwendbaren MDX-Inhalten.",
+      "Wiederverwendbare Struktur für Gemeinschaftsinitiativen und interne Teamabläufe.",
     "projects.helpus.point2":
       "Oberfläche für interne Teams und operative Klarheit geplant.",
+    "projects.cargadocs.type": "Interne Docs-Bibliothek",
+    "projects.cargadocs.description":
+      "Interne Website für eine Systemdokumentationsbibliothek, entwickelt, um technische Referenzen leicht durchsuchbar und wartbar zu halten.",
+    "projects.cargadocs.point1":
+      "Zentralisierte Dokumentationserfahrung für Produkt- und Entwicklungsteams.",
+    "projects.cargadocs.point2":
+      "Local-first Desktop-Unterstützung mit leichter API und eingebettetem Speicher.",
     "projects.previsios.type": "Landing Page",
     "projects.previsios.description":
       "Responsive Landing Page für ein Wettervorhersageprodukt, entwickelt, um die App klar zu präsentieren und mobil schnell zu bleiben.",
@@ -150,6 +166,8 @@ const translations = {
       "Mit Next.js und Tailwind für responsive Auslieferung umgesetzt.",
     "projects.previsios.point2":
       "Bewegung und Layout unterstützen die Produktgeschichte.",
+    "projects.carousel.previous": "Vorheriges Projekt",
+    "projects.carousel.next": "Nächstes Projekt",
     "languages.text": "Sprache wählen",
     "languages.title": "Sprachen",
     "languages.portuguese": "Portugiesisch",
@@ -197,6 +215,7 @@ const translations = {
 };
 
 const originalContent = {};
+const originalAriaLabels = {};
 const navLabels = {
   en: {
     "nav.home": "Home",
@@ -230,6 +249,12 @@ const storeOriginalContent = () => {
 
     originalContent[key] = element.innerHTML;
   });
+
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+    const key = element.getAttribute("data-i18n-aria-label");
+
+    originalAriaLabels[key] = element.getAttribute("aria-label") || "";
+  });
 };
 
 const syncNavLabels = (lang) => {
@@ -261,6 +286,19 @@ const setLanguage = (lang) => {
 
     } else if (translations[lang] && translations[lang][key]) {
       element.innerHTML = translations[lang][key];
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+    const key = element.getAttribute("data-i18n-aria-label");
+
+    if (lang === "en") {
+      if (originalAriaLabels[key]) {
+        element.setAttribute("aria-label", originalAriaLabels[key]);
+      }
+
+    } else if (translations[lang] && translations[lang][key]) {
+      element.setAttribute("aria-label", translations[lang][key]);
     }
   });
 

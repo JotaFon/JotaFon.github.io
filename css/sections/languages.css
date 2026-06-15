@@ -1,30 +1,135 @@
 .languages-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
-  max-width: 1000px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   margin: 0 auto;
+  min-height: 360px;
+  perspective: 1200px;
+  position: relative;
 }
 
 .language-card {
-  background: var(--card-bg);
+  --fan-offset: 0px;
+  --fan-rotate: 0deg;
+  --fan-y: 0px;
+  --fan-z: 0;
+  --fan-scale: 1;
+  --mouse-rotate-x: 0deg;
+  --mouse-rotate-y: 0deg;
+  --shine-angle: 118deg;
+  --shine-move-x: 0%;
+  --shine-move-y: 0%;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.045), transparent 38%),
+    var(--card-bg);
   border: 1px solid var(--border-primary);
   border-radius: 8px;
-  padding: 40px;
-  text-align: center;
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  flex: 0 0 clamp(230px, 28vw, 310px);
+  margin-inline: -22px;
+  min-height: 286px;
   overflow: hidden;
+  padding: 42px 34px;
+  position: relative;
+  text-align: center;
+  transform:
+    perspective(1200px)
+    translate3d(var(--fan-offset), var(--fan-y), var(--fan-z))
+    rotate(var(--fan-rotate))
+    rotateX(var(--mouse-rotate-x))
+    rotateY(var(--mouse-rotate-y))
+    scale(var(--fan-scale));
+  transform-origin: 50% 108%;
   transition:
+    background 0.3s ease,
     border-color 0.3s ease,
     box-shadow 0.3s ease,
-    transform 0.2s ease;
+    margin 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.language-card::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.language-card::after {
+  content: "";
+  position: absolute;
+  inset: -55%;
+  background: linear-gradient(
+    var(--shine-angle),
+    transparent 34%,
+    rgba(255, 255, 255, 0.025) 42%,
+    rgba(255, 255, 255, 0.14) 49%,
+    rgba(212, 175, 55, 0.08) 53%,
+    transparent 66%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(var(--shine-move-x), var(--shine-move-y), 0);
+  transition:
+    opacity 0.35s ease,
+    transform 0.12s ease-out;
+}
+
+.language-card:nth-child(1) {
+  --fan-offset: 28px;
+  --fan-rotate: -8deg;
+  --fan-y: 10px;
+}
+
+.language-card:nth-child(2) {
+  --fan-y: -6px;
+  --fan-z: 24px;
+  --fan-scale: 1.03;
+  z-index: 2;
+}
+
+.language-card:nth-child(3) {
+  --fan-offset: -28px;
+  --fan-rotate: 8deg;
+  --fan-y: 10px;
+  z-index: 1;
+}
+
+.languages-grid:hover .language-card:nth-child(1),
+.languages-grid:focus-within .language-card:nth-child(1) {
+  --fan-offset: -58px;
+  --fan-rotate: -15deg;
+  --fan-y: -8px;
+}
+
+.languages-grid:hover .language-card:nth-child(2),
+.languages-grid:focus-within .language-card:nth-child(2) {
+  --fan-y: -22px;
+}
+
+.languages-grid:hover .language-card:nth-child(3),
+.languages-grid:focus-within .language-card:nth-child(3) {
+  --fan-offset: 58px;
+  --fan-rotate: 15deg;
+  --fan-y: -8px;
 }
 
 .language-card:hover {
-  transform: var(--tilt, translateY(-8px));
   border-color: var(--accent-primary);
   box-shadow:
-    0 18px 48px var(--shadow-primary),
+    0 28px 72px var(--shadow-primary),
     0 0 0 1px rgba(212, 175, 55, 0.24);
+  z-index: 5;
+}
+
+.language-card:hover::after {
+  opacity: 0.62;
 }
 
 .language-flag {
@@ -67,6 +172,28 @@
 
 .language-card:hover .language-level {
   transform: translateY(-1px);
+}
+
+.language-card.reveal-card.is-visible {
+  transform:
+    perspective(1200px)
+    translate3d(var(--fan-offset), var(--fan-y), var(--fan-z))
+    rotate(var(--fan-rotate))
+    rotateX(var(--mouse-rotate-x))
+    rotateY(var(--mouse-rotate-y))
+    scale(var(--fan-scale));
+}
+
+.language-card.reveal-card.has-entered:hover,
+.languages-grid:hover .language-card.reveal-card.is-visible:hover,
+.languages-grid:focus-within .language-card.reveal-card.is-visible:hover {
+  transform:
+    perspective(1200px)
+    translate3d(var(--fan-offset), var(--fan-y), var(--fan-z))
+    rotate(var(--fan-rotate))
+    rotateX(var(--mouse-rotate-x))
+    rotateY(var(--mouse-rotate-y))
+    scale(var(--fan-scale));
 }
 
 .language-level.native {

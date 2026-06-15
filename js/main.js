@@ -65,7 +65,9 @@ if (!isDynamicLoading) {
     if (typeof initBackgroundScroll === "function") initBackgroundScroll();
     if (typeof initKonamiCode === "function") initKonamiCode();
     if (typeof initInteractiveCards === "function") initInteractiveCards();
+    if (typeof initProjectsCarousel === "function") initProjectsCarousel();
     if (typeof initThemeToggle === "function") initThemeToggle();
+    if (typeof initMobileSidebar === "function") initMobileSidebar();
   });
 }
 

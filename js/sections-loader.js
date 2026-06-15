@@ -5,8 +5,8 @@ const SectionsLoader = {
     "about",
     "skills",
     "projects",
-    "languages",
     "experience",
+    "languages",
     "contact",
   ],
 

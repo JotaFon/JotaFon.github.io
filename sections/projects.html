@@ -7,100 +7,178 @@
       </p>
     </div>
 
-    <div class="projects-grid">
-      <article class="project-card reveal-card">
-        <div class="project-media">
-          <img
-            src="assets/help-us.png"
-            alt="Help-Us project preview"
-            class="project-image"
-            loading="lazy"
-          />
-        </div>
-        <div class="project-content">
-          <div class="project-header">
-            <h3 class="project-title">Help-Us</h3>
-            <p class="project-type" data-i18n="projects.helpus.type">
-              Web Application
-            </p>
-          </div>
-          <p
-            class="project-description"
-            data-i18n="projects.helpus.description"
-          >
-            Web application for community help management, focused on clear
-            documentation, collaborative flows and an accessible interface.
-          </p>
-          <ul class="project-points">
-            <li data-i18n="projects.helpus.point1">
-              Structured documentation with reusable MDX content.
-            </li>
-            <li data-i18n="projects.helpus.point2">
-              Interface planned for internal teams and operational clarity.
-            </li>
-          </ul>
-          <div class="project-tags">
-            <span class="tech-tag">Docusaurus</span>
-            <span class="tech-tag">MDX</span>
-            <span class="tech-tag">React</span>
-          </div>
-          <div class="project-actions">
-            <a class="project-btn project-btn-secondary">
-              <i class="fas fa-ban"></i>
-              <span data-i18n="projects.viewBlocked">Internal Site</span>
-            </a>
-          </div>
-        </div>
-      </article>
+    <div class="projects-carousel" data-project-carousel>
+      <div class="projects-viewport">
+        <div class="projects-grid">
+          <article class="project-card reveal-card is-active">
+            <div class="project-media">
+              <img
+                src="assets/help-us.png"
+                alt="Help-Us project preview"
+                class="project-image"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-content">
+              <div class="project-header">
+                <h3 class="project-title">Help-Us</h3>
+                <p class="project-type" data-i18n="projects.helpus.type">
+                  Web Application
+                </p>
+              </div>
+              <p
+                class="project-description"
+                data-i18n="projects.helpus.description"
+              >
+                Web application for community help management, with
+                collaborative flows and an accessible interface.
+              </p>
+              <ul class="project-points">
+                <li data-i18n="projects.helpus.point1">
+                  Reusable structure for community initiatives and internal
+                  team workflows.
+                </li>
+                <li data-i18n="projects.helpus.point2">
+                  Interface planned for internal teams and operational clarity.
+                </li>
+              </ul>
+              <div class="project-tags">
+                <span class="tech-tag">Docusaurus</span>
+                <span class="tech-tag">MDX</span>
+                <span class="tech-tag">React</span>
+              </div>
+              <div class="project-actions">
+                <a class="project-btn project-btn-secondary">
+                  <i class="fas fa-ban"></i>
+                  <span data-i18n="projects.viewBlocked">Internal Site</span>
+                </a>
+              </div>
+            </div>
+          </article>
 
-      <article class="project-card reveal-card">
-        <div class="project-media">
-          <img
-            src="assets/previsios.png"
-            alt="Previsios project preview"
-            class="project-image"
-            loading="lazy"
-          />
+          <article class="project-card reveal-card">
+            <div class="project-media">
+              <img
+                src="assets/CargaDocs.png"
+                alt="CargaDocs project preview"
+                class="project-image"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-content">
+              <div class="project-header">
+                <h3 class="project-title">CargaDocs</h3>
+                <p class="project-type" data-i18n="projects.cargadocs.type">
+                  Internal Docs Library
+                </p>
+              </div>
+              <p
+                class="project-description"
+                data-i18n="projects.cargadocs.description"
+              >
+                Internal site for a system documentation library, designed to
+                keep technical references easy to browse and maintain.
+              </p>
+              <ul class="project-points">
+                <li data-i18n="projects.cargadocs.point1">
+                  Centralized documentation experience for product and
+                  development teams.
+                </li>
+                <li data-i18n="projects.cargadocs.point2">
+                  Local-first desktop support with a lightweight API and
+                  embedded storage.
+                </li>
+              </ul>
+              <div class="project-tags">
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Fastify</span>
+                <span class="tech-tag">SQLite</span>
+                <span class="tech-tag">Tauri</span>
+              </div>
+              <div class="project-actions">
+                <a class="project-btn project-btn-secondary">
+                  <i class="fas fa-ban"></i>
+                  <span data-i18n="projects.viewBlocked">Internal Site</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal-card">
+            <div class="project-media">
+              <img
+                src="assets/previsios.png"
+                alt="Previsios project preview"
+                class="project-image"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-content">
+              <div class="project-header">
+                <h3 class="project-title">Previsios</h3>
+                <p class="project-type" data-i18n="projects.previsios.type">
+                  Landing Page
+                </p>
+              </div>
+              <p
+                class="project-description"
+                data-i18n="projects.previsios.description"
+              >
+                Responsive landing page for a weather forecast product,
+                designed to present the app clearly and keep the experience fast
+                on mobile.
+              </p>
+              <ul class="project-points">
+                <li data-i18n="projects.previsios.point1">
+                  Built with Next.js and Tailwind for responsive delivery.
+                </li>
+                <li data-i18n="projects.previsios.point2">
+                  Motion and layout choices used to support product
+                  storytelling.
+                </li>
+              </ul>
+              <div class="project-tags">
+                <span class="tech-tag">Tailwind</span>
+                <span class="tech-tag">NextJS</span>
+              </div>
+              <div class="project-actions">
+                <a
+                  href="https://www.previsios.com.br/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-btn project-btn-primary"
+                >
+                  <i class="fas fa-external-link-alt"></i>
+                  <span data-i18n="projects.viewSite">View Site</span>
+                </a>
+              </div>
+            </div>
+          </article>
         </div>
-        <div class="project-content">
-          <div class="project-header">
-            <h3 class="project-title">Previsios</h3>
-            <p class="project-type" data-i18n="projects.previsios.type">
-              Landing Page
-            </p>
-          </div>
-          <p
-            class="project-description"
-            data-i18n="projects.previsios.description"
-          >
-            Responsive landing page for a weather forecast product, designed to
-            present the app clearly and keep the experience fast on mobile.
-          </p>
-          <ul class="project-points">
-            <li data-i18n="projects.previsios.point1">
-              Built with Next.js and Tailwind for responsive delivery.
-            </li>
-            <li data-i18n="projects.previsios.point2">
-              Motion and layout choices used to support product storytelling.
-            </li>
-          </ul>
-          <div class="project-tags">
-            <span class="tech-tag">Tailwind</span>
-            <span class="tech-tag">NextJS</span>
-          </div>
-          <div class="project-actions">
-            <a
-              href="https://www.previsios.com.br/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="project-btn project-btn-primary"
-            >
-              <i class="fas fa-external-link-alt"></i>
-              <span data-i18n="projects.viewSite">View Site</span>
-            </a>
-          </div>
-        </div>
-      </article>
+      </div>
+
+      <div class="project-carousel-controls">
+        <button
+          class="project-carousel-btn"
+          type="button"
+          data-project-prev
+          aria-label="Previous project"
+          data-i18n-aria-label="projects.carousel.previous"
+        >
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button
+          class="project-carousel-btn"
+          type="button"
+          data-project-next
+          aria-label="Next project"
+          data-i18n-aria-label="projects.carousel.next"
+        >
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
   </div>
 </section>

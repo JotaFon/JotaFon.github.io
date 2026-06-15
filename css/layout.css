@@ -25,6 +25,17 @@
   box-shadow: 0 12px 36px rgba(56, 45, 22, 0.12);
 }
 
+.mobile-menu-toggle,
+.mobile-nav-backdrop {
+  display: none;
+}
+
+.mobile-nav-panel {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+}
+
 .nav-links {
   display: flex;
   gap: 28px;

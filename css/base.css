@@ -30,6 +30,7 @@
     #9f7a18 100%
   );
   --page-bg-start: 10, 10, 15;
+  --page-bg-current: 10, 10, 15;
   --page-bg-end: 19, 19, 26;
   --navbar-bg: rgba(17, 24, 39, 0.88);
   --navbar-bg-scrolled: rgba(17, 24, 39, 0.96);
@@ -50,6 +51,7 @@
   --shadow-primary: rgba(159, 122, 24, 0.16);
   --shadow-secondary: rgba(159, 122, 24, 0.12);
   --page-bg-start: 248, 246, 239;
+  --page-bg-current: 248, 246, 239;
   --page-bg-end: 239, 235, 224;
   --navbar-bg: rgba(255, 250, 240, 0.82);
   --navbar-bg-scrolled: rgba(255, 250, 240, 0.94);
@@ -72,7 +74,13 @@ body {
     -apple-system,
     BlinkMacSystemFont,
     sans-serif;
-  background: var(--primary-bg);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(212, 175, 55, 0.08), transparent 34%),
+    linear-gradient(
+      145deg,
+      rgb(var(--page-bg-current)) 0%,
+      rgb(var(--page-bg-end)) 100%
+    );
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
@@ -92,43 +100,69 @@ body::after {
 
 body::before {
   background:
-    radial-gradient(circle at 18% 24%, rgba(212, 175, 55, 0.12), transparent 28%),
-    radial-gradient(circle at 78% 18%, rgba(159, 122, 24, 0.1), transparent 30%),
-    radial-gradient(circle at 55% 84%, rgba(247, 231, 166, 0.07), transparent 34%);
-  animation: ambient-drift 18s ease-in-out infinite alternate;
+    radial-gradient(circle at 14% 20%, rgba(212, 175, 55, 0.16), transparent 26%),
+    radial-gradient(circle at 82% 16%, rgba(96, 165, 250, 0.11), transparent 28%),
+    radial-gradient(circle at 70% 78%, rgba(16, 185, 129, 0.08), transparent 30%),
+    radial-gradient(circle at 28% 86%, rgba(247, 231, 166, 0.08), transparent 34%);
+  filter: saturate(1.1);
+  transform-origin: center;
+  animation: ambient-drift 24s ease-in-out infinite alternate;
 }
 
 :root[data-theme="light"] body::before {
   background:
-    radial-gradient(circle at 18% 24%, rgba(212, 175, 55, 0.18), transparent 30%),
-    radial-gradient(circle at 78% 18%, rgba(159, 122, 24, 0.1), transparent 32%),
-    radial-gradient(circle at 55% 84%, rgba(255, 255, 255, 0.72), transparent 36%);
+    radial-gradient(circle at 14% 20%, rgba(212, 175, 55, 0.18), transparent 28%),
+    radial-gradient(circle at 82% 16%, rgba(96, 165, 250, 0.12), transparent 30%),
+    radial-gradient(circle at 70% 78%, rgba(16, 185, 129, 0.1), transparent 32%),
+    radial-gradient(circle at 28% 86%, rgba(255, 255, 255, 0.74), transparent 36%);
 }
 
 body::after {
-  background-image:
-    linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 72%);
-  animation: grid-drift 28s linear infinite;
+  z-index: -1;
+  background:
+    linear-gradient(115deg, transparent 0 40%, rgba(212, 175, 55, 0.08) 48%, transparent 56%),
+    linear-gradient(rgba(148, 163, 184, 0.034) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.034) 1px, transparent 1px);
+  background-position:
+    -48vw 0,
+    0 0,
+    0 0;
+  background-size:
+    88vw 100%,
+    78px 78px,
+    78px 78px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 78%);
+  animation: background-flow 34s linear infinite;
+  opacity: 0.84;
 }
 
 @keyframes ambient-drift {
   from {
-    transform: translate3d(-2%, -1%, 0) rotate(0deg);
+    transform: translate3d(-2.5%, -1.2%, 0) rotate(0deg) scale(1);
   }
   to {
-    transform: translate3d(2%, 1%, 0) rotate(8deg);
+    transform: translate3d(2.5%, 1.2%, 0) rotate(9deg) scale(1.04);
   }
 }
 
-@keyframes grid-drift {
-  from {
-    background-position: 0 0;
+@keyframes background-flow {
+  0% {
+    background-position:
+      -48vw 0,
+      0 0,
+      0 0;
   }
-  to {
-    background-position: 72px 72px;
+  50% {
+    background-position:
+      86vw 0,
+      39px 39px,
+      39px 39px;
+  }
+  100% {
+    background-position:
+      -48vw 0,
+      78px 78px,
+      78px 78px;
   }
 }
 

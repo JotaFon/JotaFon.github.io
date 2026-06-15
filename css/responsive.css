@@ -12,11 +12,14 @@
 
   .navbar {
     padding: 8px 20px;
-    overflow-x: auto;
   }
 
   .nav-links {
     gap: 20px;
+    flex: 0 0 auto;
+  }
+
+  .mobile-nav-panel {
     flex: 0 0 auto;
   }
 
@@ -30,6 +33,10 @@
 }
 
 @media (max-width: 768px) {
+  body.mobile-nav-open {
+    overflow: hidden;
+  }
+
   .container {
     padding: 0 18px;
   }
@@ -115,30 +122,126 @@
   }
 
   .navbar {
-    gap: 10px;
-    left: 10px;
-    max-width: calc(100vw - 20px);
-    padding: 8px 10px;
-    right: 10px;
-    top: 10px;
+    background: transparent;
+    backdrop-filter: none;
+    border: 0;
+    box-shadow: none;
+    gap: 0;
+    left: 14px;
+    max-width: none;
+    padding: 0;
+    right: auto;
+    top: 14px;
     transform: none;
     border-radius: 8px;
-    justify-content: flex-start;
+    justify-content: center;
+  }
+
+  .navbar.scrolled {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .mobile-menu-toggle {
+    align-items: center;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 8px;
+    color: var(--accent-primary);
+    cursor: pointer;
+    display: inline-flex;
+    flex: 0 0 42px;
+    height: 42px;
+    justify-content: center;
+    position: relative;
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease,
+      transform 0.25s ease;
+    width: 42px;
+    z-index: 1004;
+  }
+
+  .mobile-menu-toggle:hover {
+    background: rgba(212, 175, 55, 0.18);
+    border-color: var(--accent-primary);
+    transform: translateY(-1px);
+  }
+
+  .mobile-menu-icon {
+    font-size: 1rem;
+  }
+
+  .mobile-nav-backdrop {
+    background: rgba(4, 7, 12, 0.58);
+    display: block;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    transition: opacity 0.25s ease;
+    z-index: 1001;
+  }
+
+  .mobile-nav-panel {
+    align-items: stretch;
+    background: var(--navbar-bg-scrolled);
+    backdrop-filter: blur(22px);
+    border-right: 1px solid var(--border-primary);
+    box-shadow: 22px 0 56px rgba(0, 0, 0, 0.34);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    height: 100dvh;
+    left: 0;
+    padding: 86px 22px 24px;
+    position: fixed;
+    top: 0;
+    transform: translateX(-104%);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    width: min(82vw, 320px);
+    z-index: 1002;
+  }
+
+  .navbar.is-open .mobile-nav-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .navbar.is-open .mobile-nav-panel {
+    transform: translateX(0);
+  }
+
+  .navbar.is-open .mobile-menu-toggle {
+    background: rgba(212, 175, 55, 0.18);
+    border-color: var(--accent-primary);
   }
 
   .nav-links {
-    gap: 12px;
-    font-size: 0.78rem;
-    overflow-x: auto;
-    scrollbar-width: none;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.98rem;
+    width: 100%;
   }
 
-  .nav-links::-webkit-scrollbar {
+  .nav-links a {
+    border-radius: 8px;
+    display: block;
+    padding: 11px 12px;
+    width: 100%;
+  }
+
+  .nav-links a:hover {
+    background: rgba(212, 175, 55, 0.1);
+  }
+
+  .nav-links a::after {
     display: none;
   }
 
   .nav-language {
-    gap: 8px;
+    gap: 10px;
   }
 
   .theme-toggle,
@@ -260,9 +363,32 @@
     grid-template-columns: 1fr;
   }
 
+  .languages-grid {
+    display: grid;
+    min-height: auto;
+    perspective: none;
+  }
+
   .language-card,
   .contact-card {
     padding: 24px;
+  }
+
+  .language-card {
+    flex-basis: auto;
+    margin-inline: 0;
+    min-height: auto;
+    transform: none;
+  }
+
+  .language-card.reveal-card.is-visible {
+    transform: none;
+  }
+
+  .language-card:hover,
+  .languages-grid:hover .language-card.reveal-card.is-visible:hover,
+  .languages-grid:focus-within .language-card.reveal-card.is-visible:hover {
+    transform: none;
   }
 
   .language-flag {
@@ -305,12 +431,14 @@
   }
 
   .navbar {
-    padding: 7px 8px;
+    left: 10px;
+    top: 10px;
   }
 
-  .nav-links {
-    gap: 10px;
-    font-size: 0.74rem;
+  .mobile-menu-toggle {
+    flex-basis: 40px;
+    height: 40px;
+    width: 40px;
   }
 
   .nav-language {
@@ -330,11 +458,10 @@
   }
 
   .nav-links a {
-    display: block;
-    max-width: 8.5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    max-width: none;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
   }
 
   .hero {

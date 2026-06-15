@@ -1,31 +1,45 @@
 <nav class="navbar" id="navbar" translate="no">
-  <ul class="nav-links">
-    <li><a href="#home" data-i18n="nav.home">Home</a></li>
-    <li><a href="#about" data-i18n="nav.about">About</a></li>
-    <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
-    <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
-    <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
-    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-  </ul>
+  <button
+    class="mobile-menu-toggle"
+    type="button"
+    aria-label="Open navigation menu"
+    aria-controls="mobile-nav-panel"
+    aria-expanded="false"
+  >
+    <i class="fas fa-bars mobile-menu-icon" aria-hidden="true"></i>
+  </button>
 
-  <div class="nav-language" aria-label="Language selector">
-    <button class="lang-btn active" data-lang="en" title="English">
-      <img src="https://flagcdn.com/w40/us.png" alt="English" />
-    </button>
-    <button class="lang-btn" data-lang="pt" title="Português">
-      <img src="https://flagcdn.com/w40/br.png" alt="Português" />
-    </button>
-    <button class="lang-btn" data-lang="de" title="Deutsch">
-      <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" />
+  <div class="mobile-nav-backdrop" aria-hidden="true"></div>
+
+  <div class="mobile-nav-panel" id="mobile-nav-panel">
+    <ul class="nav-links">
+      <li><a href="#home" data-i18n="nav.home">Home</a></li>
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-language" aria-label="Language selector">
+      <button class="lang-btn active" data-lang="en" title="English">
+        <img src="https://flagcdn.com/w40/us.png" alt="English" />
+      </button>
+      <button class="lang-btn" data-lang="pt" title="Português">
+        <img src="https://flagcdn.com/w40/br.png" alt="Português" />
+      </button>
+      <button class="lang-btn" data-lang="de" title="Deutsch">
+        <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" />
+      </button>
+    </div>
+
+    <button
+      class="theme-toggle"
+      type="button"
+      aria-label="Switch to light theme"
+      title="Toggle theme"
+    >
+      <i class="fas fa-moon theme-toggle-icon" aria-hidden="true"></i>
     </button>
   </div>
-
-  <button
-    class="theme-toggle"
-    type="button"
-    aria-label="Switch to light theme"
-    title="Toggle theme"
-  >
-    <i class="fas fa-moon theme-toggle-icon" aria-hidden="true"></i>
-  </button>
 </nav>
