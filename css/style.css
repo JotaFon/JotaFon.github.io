@@ -7,5 +7,5 @@
 @import url("sections/projects.css");
 @import url("sections/languages.css");
 @import url("sections/experience.css");
-@import url("sections/contact.css");
+@import url("sections/contact.css?v=portfolio-cleanup");
 @import url("responsive.css");

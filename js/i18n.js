@@ -28,12 +28,11 @@ const translations = {
     "about.text4":
       "Meus primeiros passos no desenvolvimento foram na X-Brain, onde atuei como estagiário e depois como desenvolvedor front-end junior no sistema de vendas da Claro. Hoje construo recursos web e mobile para uma aplicação de gerenciamento de frotas.",
     "about.text5":
-      "Sou formado em <strong>Análise e Desenvolvimento de Sistemas</strong> pela Universidade Positivo em Londrina - PR, Brasil, e trago experiência anterior em gestão, o que me ajuda a entender prioridades, comunicação e restrições de negócio.",
+      "Sou formado em <strong>Análise e Desenvolvimento de Sistemas</strong> pela Universidade Positivo em Londrina - PR, Brasil, com base em lógica, desenvolvimento web, bancos de dados e projetos de software.",
     "skills.title": "Competências Técnicas",
     "skills.frontend": "Front-end",
     "skills.backend": "Back-end",
     "skills.mobile": "Mobile",
-    "skills.tools": "Ferramentas & Design",
     "projects.title": "Projetos",
     "projects.description": "Alguns dos projetos que desenvolvi recentemente",
     "projects.viewSite": "Ver Site",
@@ -67,7 +66,7 @@ const translations = {
     "languages.english": "Inglês",
     "languages.german": "Alemão",
     "languages.native": "Nativo",
-    "languages.intermediate": "Intermediário",
+    "languages.intermediate": "B2",
     "languages.learning": "Nível A2",
     "experience.title": "Jornada Profissional",
     "experience.job1.title": "Desenvolvedor Full Stack",
@@ -104,6 +103,8 @@ const translations = {
     "contact.linkedin": "Vamos nos conectar!",
     "contact.github": "Confira meus projetos",
     "contact.phone": "Telefone",
+    "contact.downloadPt": "PDF em português",
+    "contact.downloadEn": "PDF em inglês",
   },
   de: {
     "nav.home": "Start",
@@ -134,12 +135,11 @@ const translations = {
     "about.text4":
       "Meine ersten Schritte in der Entwicklung waren bei X-Brain, wo ich als Praktikant und später als Junior Front-end Entwickler am Vertriebssystem von Claro gearbeitet habe. Heute entwickle ich Web- und Mobile-Funktionen für eine Anwendung zur Flottenverwaltung.",
     "about.text5":
-      "Ich habe einen Abschluss in <strong>Systemanalyse und -entwicklung</strong> an der Positivo Universität in Londrina - PR, Brasilien, und bringe frühere Management-Erfahrung mit, die mir hilft, Prioritäten, Kommunikation und geschäftliche Einschränkungen zu verstehen.",
+      "Ich habe einen Abschluss in <strong>Systemanalyse und -entwicklung</strong> an der Positivo Universität in Londrina - PR, Brasilien, mit Grundlagen in Logik, Webentwicklung, Datenbanken und Softwareprojekten.",
     "skills.title": "Technische Fähigkeiten",
     "skills.frontend": "Front-end",
     "skills.backend": "Back-end",
     "skills.mobile": "Mobile",
-    "skills.tools": "Werkzeuge & Design",
     "projects.title": "Projekte",
     "projects.description":
       "Einige der Projekte, die ich kürzlich entwickelt habe",
@@ -174,7 +174,7 @@ const translations = {
     "languages.english": "Englisch",
     "languages.german": "Deutsch",
     "languages.native": "Muttersprache",
-    "languages.intermediate": "Mittelstufe",
+    "languages.intermediate": "B2",
     "languages.learning": "Niveau A2",
     "experience.title": "Beruflicher Werdegang",
     "experience.job1.title": "Full Stack Entwickler",
@@ -211,6 +211,8 @@ const translations = {
     "contact.linkedin": "Lass uns vernetzen!",
     "contact.github": "Schau dir meine Projekte an",
     "contact.phone": "Telefon",
+    "contact.downloadPt": "PDF auf Portugiesisch",
+    "contact.downloadEn": "PDF auf Englisch",
   },
 };
 

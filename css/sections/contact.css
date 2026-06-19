@@ -60,3 +60,38 @@
   text-align: center;
   margin-top: 60px;
 }
+
+.portfolio-download {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.portfolio-download-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.portfolio-download-btn {
+  flex: 0 0 auto;
+  min-width: 180px;
+  justify-content: center;
+}
+
+@media (max-width: 760px) {
+  .portfolio-download {
+    margin-top: 40px;
+  }
+
+  .portfolio-download-actions {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .portfolio-download-btn {
+    max-width: 320px;
+    width: 100%;
+  }
+}
