@@ -294,6 +294,19 @@
   color: var(--text-muted);
 }
 
+.project-btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+}
+
+.project-btn-outline:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: rgba(128, 128, 128, 0.08);
+}
+
 .project-btn i {
   font-size: 1rem;
 }

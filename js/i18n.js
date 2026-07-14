@@ -37,6 +37,16 @@ const translations = {
     "projects.description": "Alguns dos projetos que desenvolvi recentemente",
     "projects.viewSite": "Ver Site",
     "projects.viewBlocked": "Site Interno",
+    "projects.viewDemo": "Ver Demo",
+    "projects.viewCase": "Estudo de Caso",
+    "projects.viewDocs": "Documentação",
+    "projects.netsphere.type": "Plataforma de Observabilidade",
+    "projects.netsphere.description":
+      "Plataforma B2B de observabilidade para telemetria de APIs e rede, em formato de produção: ingestão assíncrona, workers com fila e agregados no TimescaleDB por trás de um dashboard ao vivo e multi-tenant.",
+    "projects.netsphere.point1":
+      "O caminho quente de ingestão nunca toca o banco — a API valida e enfileira; os workers deduplicam e persistem em lote.",
+    "projects.netsphere.point2":
+      "Os dashboards leem apenas agregados contínuos, com percentis estatisticamente corretos via rollup de sketches do TimescaleDB.",
     "projects.helpus.type": "Aplicação Web",
     "projects.helpus.description":
       "Aplicação web para gerenciamento de ajuda comunitária, com fluxos colaborativos e interface acessível.",
@@ -145,6 +155,16 @@ const translations = {
       "Einige der Projekte, die ich kürzlich entwickelt habe",
     "projects.viewSite": "Seite ansehen",
     "projects.viewBlocked": "Interne Seite",
+    "projects.viewDemo": "Live-Demo",
+    "projects.viewCase": "Fallstudie",
+    "projects.viewDocs": "Dokumentation",
+    "projects.netsphere.type": "Observability-Plattform",
+    "projects.netsphere.description":
+      "Eine produktionsnahe B2B-Observability-Plattform für API- und Netzwerk-Telemetrie: asynchrone Ingestion, warteschlangenbasierte Worker und TimescaleDB-Aggregate hinter einem Live-Dashboard mit Mandantenfähigkeit.",
+    "projects.netsphere.point1":
+      "Der heiße Ingestion-Pfad berührt nie die Datenbank — die API validiert und reiht ein; Worker deduplizieren und persistieren im Batch.",
+    "projects.netsphere.point2":
+      "Dashboards lesen nur kontinuierliche Aggregate, mit statistisch korrekten Perzentilen durch TimescaleDB-Sketch-Rollups.",
     "projects.helpus.type": "Webanwendung",
     "projects.helpus.description":
       "Webanwendung für gemeinschaftliches Hilfsmanagement mit kollaborativen Abläufen und zugänglicher Oberfläche.",

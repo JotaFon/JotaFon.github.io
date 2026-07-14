@@ -357,6 +357,82 @@
               <article class="project-card reveal-card is-active">
                 <div class="project-media">
                   <img
+                    src="assets/netsphere.png"
+                    alt="NetSphere observability dashboard preview"
+                    class="project-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="project-content">
+                  <div class="project-header">
+                    <h3 class="project-title">NetSphere</h3>
+                    <p class="project-type" data-i18n="projects.netsphere.type">
+                      Observability Platform
+                    </p>
+                  </div>
+                  <p
+                    class="project-description"
+                    data-i18n="projects.netsphere.description"
+                  >
+                    A production-shaped B2B observability platform for API and
+                    network telemetry: async ingestion, queue-backed workers and
+                    TimescaleDB aggregates behind a live, multi-tenant dashboard.
+                  </p>
+                  <ul class="project-points">
+                    <li data-i18n="projects.netsphere.point1">
+                      Ingestion hot path never touches the database — the API
+                      validates and enqueues; workers deduplicate and persist in
+                      batches.
+                    </li>
+                    <li data-i18n="projects.netsphere.point2">
+                      Dashboards read only continuous aggregates, with
+                      percentiles kept statistically valid through TimescaleDB
+                      sketch rollups.
+                    </li>
+                  </ul>
+                  <div class="project-tags">
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">Next.js</span>
+                    <span class="tech-tag">Fastify</span>
+                    <span class="tech-tag">TimescaleDB</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Docker</span>
+                  </div>
+                  <div class="project-actions">
+                    <a
+                      href="https://netsphereweb.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="project-btn project-btn-primary"
+                    >
+                      <i class="fas fa-external-link-alt"></i>
+                      <span data-i18n="projects.viewDemo">Live Demo</span>
+                    </a>
+                    <a
+                      href="https://case.netsphereweb.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="project-btn project-btn-outline"
+                    >
+                      <i class="fas fa-book-open"></i>
+                      <span data-i18n="projects.viewCase">Case Study</span>
+                    </a>
+                    <a
+                      href="https://docs.netsphereweb.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="project-btn project-btn-outline"
+                    >
+                      <i class="fas fa-file-lines"></i>
+                      <span data-i18n="projects.viewDocs">Docs</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="project-card reveal-card">
+                <div class="project-media">
+                  <img
                     src="assets/help-us.png"
                     alt="Help-Us project preview"
                     class="project-image"
