@@ -19,6 +19,7 @@ npm run build
 ## Conteúdo e experiência
 
 - `lib/locales/pt.ts`: textos em português e dados profissionais. O namespace é `portfolio`.
+- `components/portfolio/use-portfolio-motion.ts`: coreografia de scroll, títulos, leitura progressiva, profundidade e microinterações com GSAP.
 - `components/portfolio/sculpture.tsx`: escultura procedural, material em TSL, interação por ponteiro e teclado, pausa e troca de material.
 - `app/page.tsx`: apresentação, trajetória profissional, perfil e contato.
 - `app/globals.css`: identidade visual e layouts responsivos.

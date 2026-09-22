@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Pause, Play, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 type SculptureControls = { setBlue: (value: boolean) => void; setPaused: (value: boolean) => void; reset: () => void };
 
@@ -30,7 +32,7 @@ export function Sculpture() {
         import('three/webgpu'), import('three/tsl'), import('three/addons/environments/RoomEnvironment.js'),
       ]);
       const { WebGPURenderer, Scene, PerspectiveCamera, TorusKnotGeometry, MeshPhysicalNodeMaterial, Mesh, PMREMGenerator, DirectionalLight } = THREE;
-      const { uniform, positionLocal, normalLocal, sin, mix, color } = tsl;
+      const { uniform, positionLocal, normalLocal, sin, mix, color, normalView, positionViewDirection } = tsl;
 
       if (disposed || !host) {
 
@@ -42,7 +44,9 @@ export function Sculpture() {
       const camera = new PerspectiveCamera(35, 1, .1, 50);
       const clock = uniform(0);
       const blend = uniform(0);
-      const material = new MeshPhysicalNodeMaterial({ metalness: 1, roughness: .21, clearcoat: 1, clearcoatRoughness: .15 });
+      const scrollFlow = { progress: 0 };
+      const rimIntensity = uniform(.12);
+      const material = new MeshPhysicalNodeMaterial({ metalness: 1, roughness: .16, clearcoat: 1, clearcoatRoughness: .08 });
       const wave = sin(positionLocal.y.mul(2).add(clock)).mul(sin(positionLocal.x.mul(5).add(clock.mul(.7)))).mul(.1);
       const geometry = new TorusKnotGeometry(1, .30, 200, 50, 2, 3);
       const sculpture = new Mesh(geometry, material);
@@ -58,14 +62,18 @@ export function Sculpture() {
 
       material.positionNode = positionLocal.add(normalLocal.mul(wave));
       material.colorNode = mix(color('#d9dcd6'), color('#4abbf8'), blend);
+      material.emissiveNode = color('#4abbf8').mul(normalView.dot(positionViewDirection).abs().oneMinus().pow(3)).mul(rimIntensity);
       camera.position.set(0, 0, 8.7);
       sculpture.rotation.set(.35, -.4, -.28);
       scene.add(sculpture);
 
       const light = new DirectionalLight('#4abbf8', 200);
+      const rimLight = new DirectionalLight('#d8f4ff', 8);
 
       light.position.set(2, 4, 2);
       scene.add(light);
+      rimLight.position.set(-3, 1, -2);
+      scene.add(rimLight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.1;
@@ -148,6 +156,16 @@ export function Sculpture() {
         setPaused(matches);
       }
 
+      gsap.registerPlugin(ScrollTrigger);
+
+      const motion = gsap.matchMedia();
+
+      motion.add('(prefers-reduced-motion: no-preference)', () => {
+        const tween = gsap.to(scrollFlow, { progress: 1, ease: 'none', scrollTrigger: { trigger: host.closest('.hero'), start: 'top top', end: 'bottom top', scrub: .65 } });
+
+        return () => { tween.scrollTrigger?.kill(); tween.kill(); scrollFlow.progress = 0; };
+      });
+
       function render(now: number) {
         const delta = Math.min((now - lastTime) / 1000, .05);
 
@@ -164,10 +182,16 @@ export function Sculpture() {
           targetY += delta * .09;
         }
 
-        blend.value += (blueTarget - blend.value) * .06;
-        sculpture.rotation.x += (targetX + pointer.y * .15 - sculpture.rotation.x) * .055;
-        sculpture.rotation.y += (targetY + pointer.x * .2 - sculpture.rotation.y) * .055;
-        sculpture.position.y = motionPaused ? 0 : Math.sin(elapsed * .6) * .08;
+        const easing = 1 - Math.exp(-delta * 4);
+        const flow = motionPaused ? 0 : scrollFlow.progress;
+        const scale = 1 + flow * .18;
+
+        blend.value += (blueTarget - blend.value) * easing;
+        rimIntensity.value = .12 + flow * .65;
+        sculpture.scale.setScalar(scale);
+        sculpture.rotation.x += (targetX + pointer.y * .15 + flow * .4 - sculpture.rotation.x) * easing;
+        sculpture.rotation.y += (targetY + pointer.x * .2 + flow * 1.8 - sculpture.rotation.y) * easing;
+        sculpture.position.y = motionPaused ? 0 : Math.sin(elapsed * .6) * .08 + flow * .3;
         renderer.render(scene, camera);
       }
 
@@ -193,6 +217,7 @@ export function Sculpture() {
       setPaused(reduced.matches);
       cleanup = () => {
         renderer.setAnimationLoop(null);
+        motion.revert();
         observer.disconnect();
         intersection.disconnect();
         reduced.removeEventListener('change', onPreferenceChange);
