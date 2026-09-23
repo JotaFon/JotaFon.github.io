@@ -1,0 +1,13 @@
+Model Information:
+* title:	Steamboat Willie - Animated
+* source:	https://sketchfab.com/3d-models/steamboat-willie-animated-fd5073a9f0294743b2d6da0909bdb17b
+* author:	Adrian Cojocaru (https://sketchfab.com/FatOfTheLand)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Steamboat Willie - Animated" (https://sketchfab.com/3d-models/steamboat-willie-animated-fd5073a9f0294743b2d6da0909bdb17b) by Adrian Cojocaru (https://sketchfab.com/FatOfTheLand) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+
+Adaptation: topology-changing frames sampled at 15 fps and morph animation interpolated at 7.5 fps; geometry simplified and meshopt-compressed for web playback. Original monochrome materials preserved.
