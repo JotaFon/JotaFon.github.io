@@ -446,3 +446,34 @@ h2 { font-size: clamp(42px, 5.2vw, 78px); line-height: 1.05; }
   .sculpture-canvas, .sculpture-canvas:active { cursor: url('/cursors/mickey-normal.cur') 1 2, grab; }
   button:disabled { cursor: default; }
 }
+
+/* Keep the content reachable while the character loads and the layout changes. */
+.loader-skip { position: absolute; top: calc(50% + 170px); padding: 12px 18px; min-height: 44px; color: var(--foreground); background: transparent; border: 1px solid currentColor; border-radius: 30px; font-size: 13px; }
+.loader-skip:hover { color: var(--background); background: var(--foreground); }
+.scene-controls button { min-width: 44px; width: 44px; height: 44px; }
+.language-switcher button { min-width: 40px; min-height: 40px; }
+.site-header nav a { min-height: 44px; display: inline-flex; align-items: center; }
+.footer > a { min-width: 44px; min-height: 44px; }
+.copy-email { min-height: 44px; }
+.copy-error { color: #f3f3f0; font-size: 13px; margin-bottom: 0; }
+.experience [data-slot='accordion-content'][data-state='open'] { animation: detail-open .38s cubic-bezier(.22, 1, .36, 1); }
+.experience [data-slot='accordion-content'][data-state='closed'] { animation: detail-close .26s cubic-bezier(.22, 1, .36, 1); }
+.experience-trigger:focus-visible { outline: 2px solid #f3f3f0; outline-offset: 5px; box-shadow: none; }
+.contact { clip-path: none; }
+.contact-card { transition: translate .25s cubic-bezier(.22, 1, .36, 1), box-shadow .25s; }
+.contact-card:focus-visible { outline-offset: 10px; }
+@media (hover: hover) and (pointer: fine) {
+  .contact-card:hover { translate: 0 -5px; box-shadow: 5px 9px 0 #222, 6px 10px 0 #f3f3f0; }
+  .contact-card:active { translate: 2px 2px; box-shadow: 1px 1px 0 #222, 2px 2px 0 #f3f3f0; }
+}
+@media (max-width: 760px) {
+  html { scroll-padding-top: 24px; }
+  .hero-main { padding-top: 28px; }
+  .hero-summary { order: 2; margin-top: 26px; }
+  .character-scene { order: 3; margin-top: 28px; }
+  .hero-summary .round-link { max-width: 100%; min-height: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .experience [data-slot='accordion-content'] { animation: none !important; }
+  .contact-card:hover, .contact-card:active { translate: none; }
+}

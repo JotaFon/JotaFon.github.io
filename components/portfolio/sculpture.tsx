@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Pause, Play, RotateCcw, MoveUpRight } from 'lucide-react';
+import { Pause, Play, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { Material, Mesh, Object3D, Texture } from 'three';
 import gsap from 'gsap';
@@ -80,7 +80,7 @@ export function Sculpture({ onSettled }: { onSettled: () => void }) {
       const shadowOpacity = uniform(.4);
       const shadow = new Mesh(shadowGeometry, shadowMaterial);
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const pointer = { x: 0, y: 0, id: -1, lastX: 0 };
+      const pointer = { x: 0, y: 0, id: -1, lastX: 0, startX: 0, startY: 0, dragging: false };
       const scrollFlow = { progress: 0 };
       const gesture = { stretch: 1, lean: 0 };
       const gestureTimeline = gsap.timeline({ paused: true });
@@ -88,6 +88,7 @@ export function Sculpture({ onSettled }: { onSettled: () => void }) {
       let visible = true;
       let lastTime = 0;
       let targetY = 0;
+      let needsRender = true;
 
       disposers.push(() => {
         gestureTimeline.kill();
@@ -174,6 +175,7 @@ export function Sculpture({ onSettled }: { onSettled: () => void }) {
         camera.position.set(0, 2.05, 6.8 / Math.min(aspect, 1));
         camera.lookAt(0, 1.25, 0);
         camera.updateProjectionMatrix();
+        needsRender = true;
       }
 
       function replay() {
@@ -189,9 +191,12 @@ export function Sculpture({ onSettled }: { onSettled: () => void }) {
 
         pointer.id = event.pointerId;
         pointer.lastX = event.clientX;
+        pointer.startX = event.clientX;
+        pointer.startY = event.clientY;
+        pointer.dragging = event.pointerType === 'mouse';
         host!.setPointerCapture(event.pointerId);
 
-        if (!motionPaused) {
+        if (!motionPaused && pointer.dragging) {
           gestureTimeline.clear().to(gesture, { stretch: .94, lean: -.025, duration: .18, ease: 'power2.out' }).restart();
         }
       }
@@ -205,6 +210,18 @@ export function Sculpture({ onSettled }: { onSettled: () => void }) {
         }
 
         if (pointer.id === event.pointerId) {
+          if (!pointer.dragging) {
+            const distanceX = Math.abs(event.clientX - pointer.startX);
+            const distanceY = Math.abs(event.clientY - pointer.startY);
+
+            if (distanceX < 8 || distanceX <= distanceY) {
+
+              return;
+            }
+
+            pointer.dragging = true;
+          }
+
           targetY += (event.clientX - pointer.lastX) * .008;
           pointer.lastX = event.clientX;
         }
@@ -228,11 +245,20 @@ export function Sculpture({ onSettled }: { onSettled: () => void }) {
         pointer.id = -1;
         onPointerLeave();
 
-        if (!motionPaused) {
+        if (!motionPaused && pointer.dragging && event.type !== 'pointercancel') {
           gestureTimeline.clear()
             .to(gesture, { stretch: 1.065, lean: .02, duration: .19, ease: 'power2.out' })
             .to(gesture, { stretch: 1, lean: 0, duration: .65, ease: 'elastic.out(1, .45)' }).restart();
         }
+
+        if (event.type === 'pointercancel') {
+          gestureTimeline.pause();
+          gesture.stretch = 1;
+          gesture.lean = 0;
+          needsRender = true;
+        }
+
+        pointer.dragging = false;
       }
 
       function onKeyDown(event: KeyboardEvent) {
@@ -255,6 +281,7 @@ export function Sculpture({ onSettled }: { onSettled: () => void }) {
 
       function setMotionPaused(value: boolean) {
         motionPaused = value;
+        needsRender = true;
 
         if (value) {
           gestureTimeline.pause();
@@ -293,6 +320,11 @@ export function Sculpture({ onSettled }: { onSettled: () => void }) {
           return;
         }
 
+        if (motionPaused && !needsRender && Math.abs(targetY - character.rotation.y) < .001 && Math.abs(character.rotation.x) < .001) {
+
+          return;
+        }
+
         if (!motionPaused) {
           mixer.update(delta);
         }
@@ -313,6 +345,7 @@ export function Sculpture({ onSettled }: { onSettled: () => void }) {
           children.forEach((frame) => { frame.visible = frame.scale.lengthSq() > .000001; });
         });
         renderer.render(scene, camera);
+        needsRender = false;
       }
 
       const observer = new ResizeObserver(resize);
@@ -325,6 +358,7 @@ export function Sculpture({ onSettled }: { onSettled: () => void }) {
           pointer.x = 0;
           pointer.y = 0;
           replay();
+          needsRender = true;
         },
       };
       host!.addEventListener('pointerdown', onPointerDown);
@@ -378,16 +412,15 @@ export function Sculpture({ onSettled }: { onSettled: () => void }) {
 
   return (
     <div className={`sculpture character-scene ${ready ? 'is-ready' : ''}`}>
-      <div className="sculpture-canvas" ref={hostRef} role="group" tabIndex={ready ? 0 : -1} aria-label={t('scene.label')} aria-describedby={ready ? 'scene-interaction-hint' : undefined} />
+      <div className="sculpture-canvas" ref={hostRef} role="group" tabIndex={ready ? 0 : -1} aria-label={t('scene.label')} />
       {!ready && <div className="scene-loading mono"><p role="status">{t(failed ? 'scene.fallback' : 'scene.loading')}</p>{failed && <button onClick={() => setAttempt((value) => value + 1)}>{t('scene.retry')}</button>}</div>}
       {ready && (
         <div className="scene-caption">
           <span className="mono">{t('scene.number')}</span>
           <div className="scene-controls">
-            <button onClick={togglePause} aria-label={t(paused ? 'scene.paused' : 'scene.playing')} aria-pressed={paused}>{paused ? <Play size={13} /> : <Pause size={13} />}</button>
-            <button onClick={() => controlsRef.current?.reset()} aria-label={t('scene.reset')}><RotateCcw size={13} /></button>
+            <button onClick={togglePause} aria-label={t(paused ? 'scene.paused' : 'scene.playing')} aria-pressed={paused} title={t(paused ? 'scene.paused' : 'scene.playing')}>{paused ? <Play size={13} /> : <Pause size={13} />}</button>
+            <button onClick={() => controlsRef.current?.reset()} aria-label={t('scene.reset')} title={t('scene.reset')}><RotateCcw size={13} /></button>
           </div>
-          <span className="scene-hint" id="scene-interaction-hint"><MoveUpRight size={13} aria-hidden="true" />{t('scene.hint')}</span>
           <span className="scene-credit">{t('scene.credit')} <a href="https://sketchfab.com/3d-models/steamboat-willie-animated-fd5073a9f0294743b2d6da0909bdb17b" target="_blank" rel="noreferrer">{t('scene.author')}</a><span aria-hidden="true"> · </span><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">{t('scene.license')}</a></span>
         </div>
       )}

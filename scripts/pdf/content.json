@@ -1,0 +1,136 @@
+{
+  "pt": {
+    "metaTitle": "João Victor Fonseca | Portfólio profissional",
+    "document": "PORTFÓLIO PROFISSIONAL",
+    "edition": "2026 / PT",
+    "nameFirst": "João Victor",
+    "nameLast": "Fonseca",
+    "role": "Desenvolvedor Full Stack",
+    "summary": "Desenvolvedor com atuação em front-end, back-end e mobile, construindo produtos digitais claros e fáceis de manter. Minha base em pintura digital contribui para um olhar atento à composição, à hierarquia e aos detalhes de cada interface.",
+    "location": "Londrina, PR, Brasil",
+    "availability": "Aberto a oportunidades remotas",
+    "experience": "Experiência profissional",
+    "jobs": [
+      {
+        "company": "Carga Online",
+        "role": "Desenvolvedor Full Stack",
+        "date": "MAR 2026 - ATUAL",
+        "description": "Desenvolvimento de uma aplicação para gerenciamento de frotas, caminhões e caminhoneiros. Atuação em front-end, back-end e mobile, integrando regras de negócio e necessidades operacionais com foco em clareza e manutenção.",
+        "stack": "TypeScript / AdonisJS / PostgreSQL / React / Redux / Vite / React Native"
+      },
+      {
+        "company": "X-Brain Desenvolvimento de Sistemas",
+        "role": "Desenvolvedor Front-end Junior",
+        "date": "ABR 2025 - FEV 2026",
+        "description": "Desenvolvimento do front-end do sistema de vendas da Claro. Tradução de requisitos em interfaces responsivas e usáveis, com participação em entregas iterativas, revisões de código e manutenção de fluxos do produto.",
+        "stack": "React / JavaScript / Redux / CSS"
+      },
+      {
+        "company": "X-Brain Desenvolvimento de Sistemas",
+        "role": "Estagiário de Desenvolvimento Web",
+        "date": "AGO 2024 - MAR 2025",
+        "description": "Apoio ao front-end do sistema de vendas da Claro. Participação na rotina de projetos e revisões de código, com aprendizado aplicado junto ao time de desenvolvimento.",
+        "stack": "React / JavaScript / Redux"
+      }
+    ],
+    "profile": "Competências",
+    "profileIntro": "Uma formação visual que complementa a prática em desenvolvimento de software.",
+    "skills": "Competências técnicas",
+    "skillGroups": [
+      {"title": "Front-end", "items": "JavaScript / TypeScript / React / Next.js / Redux / Vite / HTML5 / CSS3"},
+      {"title": "Back-end", "items": "Node.js / AdonisJS / Nest.js / PostgreSQL"},
+      {"title": "Mobile", "items": "React Native / Flutter"}
+    ],
+    "creativeLabel": "DESENVOLVIMENTO CRIATIVO",
+    "creative": "Three.js / WebGL / GSAP / TSL · Aplicados neste portfólio web.",
+    "background": "Experiência criativa",
+    "teachingRole": "Professor de Pintura Digital",
+    "teachingSchool": "Escola Imago · Taubaté, SP",
+    "teachingDate": "FEV 2021 - NOV 2021",
+    "teachingDescription": "Ensino de fundamentos visuais e processo criativo. Experiência em didática, feedback e comunicação, que segue influenciando meu cuidado com interfaces e hierarquia visual.",
+    "education": "Formação",
+    "degree": "Análise e Desenvolvimento de Sistemas",
+    "university": "Universidade Positivo",
+    "universityLocation": "Londrina, PR",
+    "highSchool": "Ensino Médio",
+    "highSchoolName": "Universidade de Taubaté",
+    "highSchoolLocation": "Taubaté, SP",
+    "languages": "Idiomas",
+    "languageList": [{"name":"Português", "level":"Nativo"}, {"name":"Inglês", "level":"B2"}, {"name":"Alemão", "level":"A2"}],
+    "contact": "Contato",
+    "emailLabel": "E-MAIL",
+    "phoneLabel": "WHATSAPP",
+    "githubLabel": "GITHUB",
+    "linkedinLabel": "LINKEDIN",
+    "siteLabel": "SITE",
+    "contactNote": "Links clicáveis",
+    "footer": "DESENVOLVIMENTO / EXPRESSÃO"
+  },
+  "en": {
+    "metaTitle": "João Victor Fonseca | Professional portfolio",
+    "document": "PROFESSIONAL PORTFOLIO",
+    "edition": "2026 / EN",
+    "nameFirst": "João Victor",
+    "nameLast": "Fonseca",
+    "role": "Full Stack Developer",
+    "summary": "Developer working across front-end, back-end and mobile, building clear, maintainable digital products. My background in digital painting brings attention to composition, hierarchy and the details that shape each interface.",
+    "location": "Londrina, Brazil",
+    "availability": "Open to remote opportunities",
+    "experience": "Professional experience",
+    "jobs": [
+      {
+        "company": "Carga Online",
+        "role": "Full Stack Developer",
+        "date": "MAR 2026 - PRESENT",
+        "description": "Developing an application for managing fleets, trucks and drivers. Working across front-end, back-end and mobile, connecting business rules and operational needs with a focus on clarity and maintainability.",
+        "stack": "TypeScript / AdonisJS / PostgreSQL / React / Redux / Vite / React Native"
+      },
+      {
+        "company": "X-Brain Desenvolvimento de Sistemas",
+        "role": "Junior Front-end Developer",
+        "date": "APR 2025 - FEB 2026",
+        "description": "Front-end development for Claro's sales platform. Translating requirements into responsive, usable interfaces and contributing to iterative releases, code reviews and the maintenance of product workflows.",
+        "stack": "React / JavaScript / Redux / CSS"
+      },
+      {
+        "company": "X-Brain Desenvolvimento de Sistemas",
+        "role": "Web Development Intern",
+        "date": "AUG 2024 - MAR 2025",
+        "description": "Supporting the front-end of Claro's sales platform. Taking part in day-to-day project work and code reviews, with practical learning alongside the development team.",
+        "stack": "React / JavaScript / Redux"
+      }
+    ],
+    "profile": "Skills",
+    "profileIntro": "A visual background that complements hands-on software development.",
+    "skills": "Technical skills",
+    "skillGroups": [
+      {"title": "Front-end", "items": "JavaScript / TypeScript / React / Next.js / Redux / Vite / HTML5 / CSS3"},
+      {"title": "Back-end", "items": "Node.js / AdonisJS / Nest.js / PostgreSQL"},
+      {"title": "Mobile", "items": "React Native / Flutter"}
+    ],
+    "creativeLabel": "CREATIVE DEVELOPMENT",
+    "creative": "Three.js / WebGL / GSAP / TSL · Used in this web portfolio.",
+    "background": "Creative experience",
+    "teachingRole": "Digital Painting Teacher",
+    "teachingSchool": "Escola Imago · Taubaté, Brazil",
+    "teachingDate": "FEB 2021 - NOV 2021",
+    "teachingDescription": "Teaching visual fundamentals and the creative process. Experience in teaching, feedback and communication continues to inform my attention to interfaces and visual hierarchy.",
+    "education": "Education",
+    "degree": "Systems Analysis and Development",
+    "university": "Universidade Positivo",
+    "universityLocation": "Londrina, Brazil",
+    "highSchool": "High School",
+    "highSchoolName": "Universidade de Taubaté",
+    "highSchoolLocation": "Taubaté, Brazil",
+    "languages": "Languages",
+    "languageList": [{"name":"Portuguese", "level":"Native"}, {"name":"English", "level":"B2"}, {"name":"German", "level":"A2"}],
+    "contact": "Contact",
+    "emailLabel": "EMAIL",
+    "phoneLabel": "WHATSAPP",
+    "githubLabel": "GITHUB",
+    "linkedinLabel": "LINKEDIN",
+    "siteLabel": "WEBSITE",
+    "contactNote": "Clickable links",
+    "footer": "DEVELOPMENT / EXPRESSION"
+  }
+}

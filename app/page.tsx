@@ -87,12 +87,12 @@ function Portfolio() {
     <LanguageSwitcher />
   </div>
 </header>
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         <section className="hero" id="home">
           <div className="hero-glow" aria-hidden="true" />
           <div className="hero-top mono"><span><i className="status-dot" />{t('hero.availability')}</span><span>{t('hero.location')}</span></div>
-          <div className="hero-main"><Sculpture onSettled={onSceneSettled}/><div className="hero-copy"><p className="eyebrow">{t('hero.eyebrow')}</p><h1><span>{t('hero.line1')}</span><span>{t('hero.line2')}</span><span className="accent">{t('hero.line3')}</span></h1></div><div className="hero-summary"><p>{t('hero.intro')}</p><a className="round-link" href="#work">{t('hero.cta')}<span data-magnetic><ArrowDown size={20} /></span></a></div></div>
-          <div className="hero-bottom mono"><span>{t('hero.edition')}</span><span>{t('hero.scroll')}<ArrowDown size={14}/></span></div>
+          <div className="hero-main"><div className="hero-copy"><p className="eyebrow">{t('hero.eyebrow')}</p><h1><span>{t('hero.line1')}</span><span>{t('hero.line2')}</span><span className="accent">{t('hero.line3')}</span></h1></div><div className="hero-summary"><p>{t('hero.intro')}</p><a className="round-link" href="#work">{t('hero.cta')}<span data-magnetic><ArrowDown size={20} /></span></a></div><Sculpture onSettled={onSceneSettled}/></div>
+          <div className="hero-bottom mono"><span>{t('hero.edition')}</span></div>
         </section>
         <section id="work" className="section work">
           <div className="section-heading"><div><h2 data-heading>{t('work.title')}</h2><p className="section-intro">{t('work.intro')}</p></div><ArrowDown className="heading-arrow" size={42} strokeWidth={1}/></div>
@@ -108,16 +108,15 @@ function Portfolio() {
               </AccordionItem>
             ))}
           </Accordion>
-          <a className="text-link work-github" href="https://github.com/JotaFon" target="_blank" rel="noreferrer"><SocialIcon name="github"/>{t('contact.github')}<ArrowUpRight size={18}/></a>
         </section>
         <section id="about" className="section about">
           <div className="about-heading"><h2 data-heading>{t('about.title1')}<br /><span className="accent">{t('about.title2')}</span></h2></div>
           <div className="about-grid"><div className="about-art" data-reveal><div className="art-code" aria-hidden="true"><span>{t('about.art')}</span><span className="art-x">×</span><span>{t('about.code')}</span></div><p className="mono">{t('about.connection')}</p><div className="stat-row"><div><span>{t('about.years')}</span><p className="mono">{t('about.yearsLabel')}</p></div><div><span aria-hidden="true">_</span><p className="mono">{t('about.areasLabel')}</p></div></div></div>
-          <div className="about-copy"><h3 className="reading-statement" aria-label={t('about.lead')}><span aria-hidden="true">{t('about.lead').split(' ').map((word, index) => <span className="reading-word" key={`${word}-${index}`}>{word}{' '}</span>)}</span></h3><p>{t('about.paragraph1')}</p><p>{t('about.paragraph2')}</p><div className="about-facts"><div><p className="eyebrow">{t('about.education')}</p><p>{t('about.degree')}</p><span>{t('about.school')}</span></div><div><p className="eyebrow">{t('about.languages')}</p><p>{t('about.languageList')}</p></div></div><a className="text-link" href="/joao-victor-fonseca-portfolio.pdf" download>{t('about.pdf')}<Download size={17}/></a></div></div>
+          <div className="about-copy"><h3 className="reading-statement" aria-label={t('about.lead')}><span aria-hidden="true">{t('about.lead').split(' ').map((word, index) => <span className="reading-word" key={`${word}-${index}`}>{word}{' '}</span>)}</span></h3><p>{t('about.paragraph1')}</p><p>{t('about.paragraph2')}</p><div className="about-facts"><div><p className="eyebrow">{t('about.education')}</p><p>{t('about.degree')}</p><span>{t('about.school')}</span></div><div><p className="eyebrow">{t('about.languages')}</p><p>{t('about.languageList')}</p></div></div><a className="text-link" href={resolvedLanguage === 'en' ? '/joao-victor-fonseca-portfolio-en.pdf' : '/joao-victor-fonseca-portfolio.pdf'} download>{t('about.pdf')}<Download size={17}/></a></div></div>
           <div className="skills"><p className="eyebrow">{t('about.stack')}</p>{groups.map(({ title, items: technologies }) => <div className="skill-group" key={title}><h3>{title}</h3><p>{technologies}</p></div>)}</div>
         </section>
-        <section id="contact" className="section contact contact-hub" aria-labelledby="contact-heading">
-          <div className="contact-hub-heading"><h2 id="contact-heading" data-heading>{t('contact.title')}</h2><span className="availability mono"><i className="status-dot" />{t('hero.availability')}</span></div>
+        <section id="contact" className="section contact contact-hub" aria-label={t('contact.channels')}>
+          <div className="contact-hub-heading"><span className="availability mono"><i className="status-dot" />{t('hero.availability')}</span></div>
           <div className="contact-cards" aria-label={t('contact.channels')}>
             {(['github', 'gmail', 'whatsapp', 'linkedin'] as const).map((channel) => (
               <a className={'contact-card contact-card-' + channel} key={channel} href={contactLinks[channel]} target={channel === 'gmail' ? undefined : '_blank'} rel={channel === 'gmail' ? undefined : 'noreferrer'}>
@@ -129,7 +128,7 @@ function Portfolio() {
             ))}
           </div>
           <div className="contact-hub-bottom"><button className="copy-email" onClick={copyEmail}>{copyStatus === 'copied' ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}{t(copyStatus === 'copied' ? 'contact.copied' : 'contact.copy')}</button><span className="mono">{t('contact.remote')}</span></div>
-          <p className="copy-status sr-only" role="status">{copyStatus ? t('contact.' + copyStatus) : ''}</p>
+          <p className={copyStatus === 'copyError' ? 'copy-status copy-error' : 'copy-status sr-only'} role="status">{copyStatus ? t('contact.' + copyStatus) : ''}</p>
         </section>
 
       </main>

@@ -24,6 +24,7 @@ function BlinkingCharacter({ onReady }: { onReady: () => void }) {
 
     const handleAssetReady = () => {
       loadedCount++;
+
       if (loadedCount === 2 && isMounted) {
         onReadyRef.current();
       }
@@ -40,6 +41,7 @@ function BlinkingCharacter({ onReady }: { onReady: () => void }) {
     img1.src = '/icon1.png';
     img2.src = '/icon2.png';
 
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const pattern = [
       { closed: false, duration: 1000 },
       { closed: true,  duration: 200 },
@@ -48,23 +50,33 @@ function BlinkingCharacter({ onReady }: { onReady: () => void }) {
       { closed: false, duration: 2500 },
       { closed: true,  duration: 150 },
     ];
-
     let step = 0;
     let timeoutId: NodeJS.Timeout;
-
     const runPattern = () => {
-      if (!isMounted) return;
+      if (!isMounted || reduced.matches) {
+
+        return;
+      }
+
       const current = pattern[step];
+
       setIsClosed(current.closed);
       step = (step + 1) % pattern.length;
       timeoutId = setTimeout(runPattern, current.duration);
     };
+    const onPreferenceChange = () => {
+      clearTimeout(timeoutId);
+      setIsClosed(false);
+      runPattern();
+    };
 
     runPattern();
+    reduced.addEventListener('change', onPreferenceChange);
 
     return () => {
       isMounted = false;
       clearTimeout(timeoutId);
+      reduced.removeEventListener('change', onPreferenceChange);
     };
   }, []);
 
@@ -72,7 +84,7 @@ function BlinkingCharacter({ onReady }: { onReady: () => void }) {
     <div className="character-icon-container">
       <img
         src={isClosed ? '/icon2.png' : '/icon1.png'}
-        alt="Loading character"
+        alt=""
         className="character-icon"
       />
     </div>
@@ -84,17 +96,15 @@ export function PageLoader({ sceneSettled, contentRef, onComplete }: PageLoaderP
   const overlayRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-
   const [solidReady, setSolidReady] = useState(false);
   const onSolidReady = useCallback(() => setSolidReady(true), []);
-
   const progressRef = useRef({ value: 0 });
-
   const [documentReady, setDocumentReady] = useState(false);
   const [fontsReady, setFontsReady] = useState(false);
   const [minimumElapsed, setMinimumElapsed] = useState(false);
   const [timedOut, setTimedOut] = useState(false);
-
+  const [canSkip, setCanSkip] = useState(false);
+  const skippedRef = useRef(false);
   const complete = (minimumElapsed && documentReady && fontsReady && sceneSettled) || timedOut;
   const target = complete ? 100 : 10 + (documentReady ? 20 : 0) + (fontsReady ? 25 : 0) + (sceneSettled ? 35 : 0);
 
@@ -104,6 +114,7 @@ export function PageLoader({ sceneSettled, contentRef, onComplete }: PageLoaderP
     const previousInert = content?.inert ?? false;
     const onLoad = () => setDocumentReady(true);
     const deadlineTimer = setTimeout(() => setTimedOut(true), 10000);
+    const skipTimer = setTimeout(() => setCanSkip(true), 1500);
     let cancelled = false;
 
     document.body.style.overflow = 'hidden';
@@ -127,20 +138,28 @@ export function PageLoader({ sceneSettled, contentRef, onComplete }: PageLoaderP
     return () => {
       cancelled = true;
       clearTimeout(deadlineTimer);
+      clearTimeout(skipTimer);
       window.removeEventListener('load', onLoad);
       document.body.style.overflow = previousOverflow;
 
       if (content) {
         content.inert = previousInert;
       }
+
+      if (skippedRef.current) {
+        content?.querySelector<HTMLElement>('#main')?.focus({ preventScroll: true });
+      }
     };
   }, [contentRef]);
 
   useEffect(() => {
-    if (!solidReady) return;
+    if (!solidReady) {
+
+      return;
+    }
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const minimumTimer = setTimeout(() => setMinimumElapsed(true), reduced ? 0 : 2100);
+    const minimumTimer = setTimeout(() => setMinimumElapsed(true), reduced ? 0 : 900);
 
     return () => clearTimeout(minimumTimer);
   }, [solidReady]);
@@ -160,6 +179,7 @@ export function PageLoader({ sceneSettled, contentRef, onComplete }: PageLoaderP
         if (fillRef.current) {
           gsap.set(fillRef.current, { scaleX: progress.value / 100 });
         }
+
         if (trackRef.current) {
           trackRef.current.setAttribute('aria-valuenow', currentVal.toString());
           trackRef.current.setAttribute('aria-valuetext', t('loader.progress', { count: currentVal }));
@@ -174,6 +194,11 @@ export function PageLoader({ sceneSettled, contentRef, onComplete }: PageLoaderP
 
     return () => { sequence.kill(); };
   }, [target, complete, onComplete, t]);
+
+  function skipLoading() {
+    skippedRef.current = true;
+    onComplete();
+  }
 
   return (
     <div className="page-loader" ref={overlayRef}>
@@ -191,6 +216,7 @@ export function PageLoader({ sceneSettled, contentRef, onComplete }: PageLoaderP
         >
           <div className="loader-fill" ref={fillRef}/>
         </div>
+        {canSkip && !complete && <button type="button" className="loader-skip" onClick={skipLoading}>{t('loader.skip')}</button>}
       </div>
     </div>
   );
